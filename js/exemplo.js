@@ -2250,9 +2250,6 @@ async function decomporAte(base, origemPot, destinoPot) {
       nova.className = "ball bolinha-chegando";
       bloco1.applyBallStyle(nova, pot - 1);
 
-      // 💙 cor azul temporária
-      nova.style.backgroundColor = "#2196f3"; // cor azul temporária
-
       // ➕ TOCA o som de aparição/adição para cada bolinha nova
       if (blocoResultado.soundEnabled) {
         blocoResultado.addSound.pause();
