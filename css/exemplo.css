@@ -877,7 +877,6 @@ button:hover {
 
 .bolinha-transformando,
 .meia-bolinha.bolinha-transformando {
-  background-color: blue !important;
   border: 2px solid red !important;
   animation: pulsarEPiscar 0.6s ease-in-out infinite alternate;
 }
@@ -974,7 +973,6 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
 /* 🔶 Bolinha que será emprestada — piscar + pulsar azul + borda vermelha */
 .bolinha-transformando,
 .meia-bolinha.bolinha-transformando {
-  background-color: blue !important;
   border: 2px solid red !important;
   animation: pulsarEPiscar 0.6s ease-in-out infinite alternate;
 }
@@ -982,12 +980,12 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
 @keyframes pulsarEPiscar {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 6px 2px #2196f3; /* azul */
+    box-shadow: 0 0 6px 2px #ff6347; /* vermelho claro */
     opacity: 1;
   }
   100% {
     transform: scale(1.12);
-    box-shadow: 0 0 10px 4px #1976d2; /* azul escuro */
+    box-shadow: 0 0 10px 4px #d62728; /* vermelho escuro */
     opacity: 0.6;
   }
 }
@@ -995,7 +993,6 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
 /* 🔵 Bolinhas que chegam após o empréstimo — azul + pulsar */
 .bolinha-chegando,
 .meia-bolinha.bolinha-chegando {
-  background-color: blue !important;
   border: 2px solid red !important;
   animation: pulsarChegada 0.6s ease-in-out 0s 2 alternate;
 }
@@ -1131,7 +1128,6 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
 
 /* 🔵 Bolinhas piscando em azul escuro com borda vermelha */
 .bolinha-azul {
-  background-color: blue !important; /* Azul escuro */
   border: 2px solid red !important;
   box-shadow: 0 0 6px red;
   animation: piscarAzulForte 0.6s ease-in-out infinite alternate;
@@ -1175,7 +1171,7 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
 /* 💥 Explosão */
 .explodindo {
   animation: explode 0.4s forwards;
-  background-color: blue !important;
+
   border: 2px solid red !important;
   box-shadow: 0 0 10px red;
 }
@@ -1220,7 +1216,6 @@ body.modo-subtracao .bloco-subtracao-visual .meia-bolinha.bolinha-chegando,
 body.modo-subtracao
   .bloco-subtracao-visual
   .meia-bolinha.bolinha-transformando {
-  background-color: blue !important;
   border: 2px solid blue !important;
 }
 
@@ -1942,7 +1937,7 @@ body.modo-divisao .bloco-resultado .container {
 /* Animação para bolinhas que serão convertidas no "vai-um" */
 .bolinha-vai-um-piscar {
   animation: piscarBolinha 0.8s infinite alternate; /* Pisca */
-  background-color: blue !important; /* Cor vermelha para destaque */
+
   box-shadow: 0 0 8px 3px red; /* Brilho */
   transform: scale(1.1); /* Um leve aumento de tamanho */
 }

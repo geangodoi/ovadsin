@@ -1187,8 +1187,10 @@ document
 
     // ✅ Validação completa da divisão
     if (operacao === "divisao") {
-      const valor1 = bloco1.getValorDecimal();
-      const valor2 = bloco2.getValorDecimal();
+      // ✅ CORREÇÃO: A animação conceitual de "distribuir bolinhas"
+      // só deve operar com a PARTE INTEIRA dos números.
+      const valor1 = Math.floor(bloco1.getValorDecimal());
+      const valor2 = Math.floor(bloco2.getValorDecimal());
 
       if (valor1 === 0) {
         alert("O Bloco 1 (dividendo) precisa ter valor diferente de zero.");
@@ -1205,10 +1207,9 @@ document
           "O número do Bloco 1 (dividendo) deve ser maior ou igual ao do Bloco 2 (divisor)."
         );
         return;
-      }
+      } // ✅ Chama o "Roteador" da Divisão
 
-      // ✅ Chama a função de divisão visual
-      await executarAnimacaoDivisaoVisual(valor1, valor2);
+      await executarAnimacaoDivisaoRoteador(valor1, valor2);
       return; // ⛔ Impede cair nas outras operações
     }
 
@@ -1269,9 +1270,34 @@ document
     }
   });
 
+/**
+ * Roteador para a Animação de Divisão.
+ * Decide se deve usar a animação "Literal" (bolinhas) ou "Simbólica" (números)
+ * com base no tamanho dos valores.
+ */
+async function executarAnimacaoDivisaoRoteador(dividendo, divisor) {
+  // Define os limites máximos para a animação com bolinhas
+  const MAX_BOLINHAS_MONTE = 150; // ✅ Alterado para o seu valor
+  const MAX_GRUPOS = 20; // ✅ Alterado para o seu valor
+
+  // Pega a parte inteira (a animação literal não usa fração)
+  const dividendoInt = Math.floor(dividendo);
+  const divisorInt = Math.floor(divisor);
+
+  // Se os números forem muito grandes, usa a animação simbólica (com números)
+  if (divisorInt > MAX_GRUPOS || dividendoInt > MAX_BOLINHAS_MONTE) {
+    console.log("Números grandes. Usando animação simbólica.");
+    await executarAnimacaoDivisaoSimbolica(dividendoInt, divisorInt);
+  } else {
+    // Se os números forem pequenos, usa a animação literal (com bolinhas)
+    console.log("Números pequenos. Usando animação literal.");
+    await executarAnimacaoDivisaoLiteral(dividendoInt, divisorInt);
+  }
+}
+
 // ✅ Função de animação da divisão visual com bolinhas
 // ✅ Função de animação da divisão visual com bolinhas (CORRIGIDA)
-async function executarAnimacaoDivisaoVisual(dividendo, divisor) {
+async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
   // 🟢 Pega o Bloco Pai (para poder exibi-lo)
   const blocoPai = document.getElementById("blocoMultiplicacaoVisual");
   // 🟢 Pega o Bloco Filho (o container correto para desenhar)
@@ -1539,7 +1565,7 @@ async function executarAnimacaoDivisaoVisual(dividendo, divisor) {
   // Cria a caixa (retângulo) para o resultado
   const resultadoCaixa = document.createElement("div");
   resultadoCaixa.className = "result-box";
-  resultadoCaixa.textContent = `Quociente: ${quociente} e Resto: ${resto}`;
+  resultadoCaixa.textContent = `Divisor: ${divisor} , Quociente: ${quociente} e Resto: ${resto}`;
 
   // Estilos para a caixa de resultado
   // ❌ A linha "marginTop" foi removida daqui
@@ -1607,6 +1633,260 @@ async function executarAnimacaoDivisaoVisual(dividendo, divisor) {
   );
 
   blocoResultado.setResultado(resultado, base, casasInt, 0);
+}
+
+/**
+ * Executa a animação da divisão de forma "Simbólica" (com números)
+ * para casos em que os valores são muito grandes para desenhar bolinhas.
+ */
+async function executarAnimacaoDivisaoSimbolica(dividendo, divisor) {
+  // 🟢 Pega o Bloco Pai e o Bloco Filho
+  const blocoPai = document.getElementById("blocoMultiplicacaoVisual");
+  const container = document.getElementById("containerMultiplicacaoVisual");
+  container.innerHTML = ""; // Limpa
+
+  // 🟢 Exibe os containers
+  blocoPai.style.display = "flex";
+  container.style.display = "flex";
+
+  // 🟢 Define os estilos (vertical, com espaçamento)
+  container.style.flexDirection = "column";
+  container.style.flexWrap = "nowrap";
+  container.style.justifyContent = "flex-start";
+  container.style.alignItems = "center";
+  container.style.alignSelf = "center";
+  container.style.gap = "20px";
+
+  // ############# 1. CALCULAR RESULTADOS #############
+  const quociente = Math.floor(dividendo / divisor);
+  const resto = dividendo % divisor;
+
+  // ############# 2. CRIAR O "MONTE" (DIVIDENDO) #############
+  const monteContainer = document.createElement("div");
+  // Mostra apenas o número, sem bolinhas
+  monteContainer.innerHTML = `<strong style="margin-bottom: 5px; width: 100%; text-align: center; display: block;">Dividendo</strong>`;
+  monteContainer.style.border = "2px dashed #007bff";
+  monteContainer.style.padding = "10px";
+  monteContainer.style.borderRadius = "8px";
+  monteContainer.style.width = "80%";
+
+  // Cria o contador numérico para o dividendo
+  const dividendoContador = document.createElement("div");
+  dividendoContador.className = "contador-bolinhas"; // Reutiliza sua classe de contador
+  dividendoContador.textContent = dividendo;
+  dividendoContador.style.opacity = 0; // Começa invisível
+  monteContainer.appendChild(dividendoContador);
+
+  container.appendChild(monteContainer);
+
+  // Animação de fade-in
+  await esperar(100);
+  requestAnimationFrame(() => (dividendoContador.style.opacity = 1));
+  await esperar(1000);
+
+  // ############# 3. CRIAR A ÁREA DOS GRUPOS (ANIMADA) #############
+  const gruposContainer = document.createElement("div");
+  gruposContainer.style.display = "flex";
+  gruposContainer.style.flexWrap = "wrap";
+  gruposContainer.style.justifyContent = "center";
+  gruposContainer.style.alignItems = "stretch"; // Garante altura igual
+  gruposContainer.style.gap = "15px";
+  container.appendChild(gruposContainer);
+
+  // Array para guardar os grupos que vamos preencher com o quociente
+  const caixasDeGrupoVazias = [];
+
+  // Define quantos grupos mostrar no início e no fim
+  const LIMITE_GRUPOS_VISIVEIS = 7; // Total (5 no início + 2 no fim)
+  const GRUPOS_INICIO = 5;
+
+  // Função de helper para tocar som de "inserir"
+  const tocarSomInserir = () => {
+    if (blocoResultado.soundEnabled) {
+      blocoResultado.addSound.pause();
+      blocoResultado.addSound.currentTime = 0;
+      blocoResultado.addSound.play();
+    }
+  };
+
+  const tempoAparecer = 800; // Velocidade que as caixas aparecem
+
+  // --- Caso 1: Divisor é PEQUENO (<= 7), mostra TODOS os grupos ---
+  if (divisor <= LIMITE_GRUPOS_VISIVEIS) {
+    for (let i = 1; i <= divisor; i++) {
+      const grupo = criarCaixaGrupoSimbolico(i);
+      gruposContainer.appendChild(grupo);
+      caixasDeGrupoVazias.push(grupo); // Salva este grupo
+      tocarSomInserir();
+      await esperar(tempoAparecer);
+    }
+  }
+  // --- Caso 2: Divisor é GRANDE (> 7), mostra 5, ..., 2 ---
+  else {
+    // 1. Grupos 1 a 5
+    for (let i = 1; i <= GRUPOS_INICIO; i++) {
+      const grupo = criarCaixaGrupoSimbolico(i);
+      gruposContainer.appendChild(grupo);
+      caixasDeGrupoVazias.push(grupo); // Salva os 5 primeiros
+      tocarSomInserir();
+      await esperar(tempoAparecer);
+    }
+
+    // 2. Ellipsis (...)
+    const ellipsis = document.createElement("div");
+    ellipsis.textContent = "...";
+    ellipsis.style.alignSelf = "center";
+    ellipsis.style.fontSize = "2em";
+    ellipsis.style.padding = "0 15px";
+    gruposContainer.appendChild(ellipsis);
+    tocarSomInserir();
+    await esperar(tempoAparecer);
+
+    // 3. Grupos N-1 e N
+    const grupoN_1 = criarCaixaGrupoSimbolico(divisor - 1);
+    gruposContainer.appendChild(grupoN_1);
+    caixasDeGrupoVazias.push(grupoN_1); // Salva o penúltimo
+    tocarSomInserir();
+    await esperar(tempoAparecer);
+
+    const grupoN = criarCaixaGrupoSimbolico(divisor);
+    gruposContainer.appendChild(grupoN);
+    caixasDeGrupoVazias.push(grupoN); // Salva o último
+    tocarSomInserir();
+    await esperar(tempoAparecer);
+  }
+
+  // 4. Caixa Resto (sempre aparece por último)
+  const restoBoxEl = criarCaixaGrupoSimbolico(`Resto`);
+  gruposContainer.appendChild(restoBoxEl);
+  tocarSomInserir();
+  await esperar(tempoAparecer);
+
+  // Pausa curta para o aluno assimilar
+  await esperar(500);
+
+  // ############# 4. ANIMAR DISTRIBUIÇÃO SIMBÓLICA #############
+
+  // Pisca o dividendo
+  dividendoContador.classList.add("processando-numero");
+  await esperar(800);
+  dividendoContador.classList.remove("processando-numero");
+  dividendoContador.style.opacity = 0.3; // Esmaece o dividendo
+
+  // Toca som de "saída" (explosão)
+  if (blocoResultado.soundEnabled) {
+    blocoResultado.removeSound.pause();
+    blocoResultado.removeSound.currentTime = 0;
+    blocoResultado.removeSound.play();
+  }
+  await esperar(200); // Pequena pausa após som
+
+  // Anima o quociente em TODOS os grupos visíveis, um por um
+  for (const grupoEl of caixasDeGrupoVazias) {
+    const quocienteContador = document.createElement("div");
+    quocienteContador.className = "contador-bolinhas numero-recebendo-vai-um";
+    quocienteContador.textContent = quociente;
+    grupoEl.appendChild(quocienteContador);
+
+    tocarSomInserir();
+    await esperar(300); // Animação rápida entre os contadores
+  }
+
+  // Anima o resto
+  const restoContador = document.createElement("div");
+  restoContador.className = "contador-bolinhas numero-recebendo-vai-um";
+  restoContador.textContent = resto;
+
+  // ✅✅✅ INÍCIO DA CORREÇÃO ✅✅✅
+  // Só aplica os efeitos de "Resto" se ele for maior que zero
+  if (resto > 0) {
+    // 1. Muda a cor do NÚMERO e da borda do contador
+    restoContador.style.color = "#d62728"; // Vermelho para o número
+    restoContador.style.borderColor = "#ff6347"; // Borda vermelha clara
+
+    // 2. Pisca a CAIXA 3 vezes (o título já está vermelho do Passo 1)
+    const sombraOriginal = restoBoxEl.style.boxShadow || "";
+    for (let i = 0; i < 3; i++) {
+      restoBoxEl.style.boxShadow = "0 0 15px 5px #ff6347"; // Brilho vermelho
+      await esperar(300);
+      restoBoxEl.style.boxShadow = sombraOriginal; // Remove brilho
+      await esperar(300);
+    }
+  }
+  // ✅✅✅ FIM DA CORREÇÃO ✅✅✅
+
+  restoBoxEl.appendChild(restoContador);
+  tocarSomInserir();
+
+  await esperar(1000); // Pausa para ver os números
+
+  // ############# 5. ADICIONAR TEXTO DE RESULTADO #############
+  const linhaResultadoWrapper = document.createElement("div");
+  linhaResultadoWrapper.style.display = "flex";
+  linhaResultadoWrapper.style.flexDirection = "row";
+  linhaResultadoWrapper.style.alignItems = "center";
+  linhaResultadoWrapper.style.justifyContent = "center";
+  linhaResultadoWrapper.style.gap = "20px";
+  linhaResultadoWrapper.style.marginTop = "15px";
+
+  const resultadoCaixa = document.createElement("div");
+  resultadoCaixa.className = "result-box";
+  resultadoCaixa.textContent = `Divisor: ${divisor} , Quociente: ${quociente} e Resto: ${resto}`;
+  resultadoCaixa.style.fontSize = "1.2em";
+  resultadoCaixa.style.fontWeight = "bold";
+  resultadoCaixa.style.color = "#007bff";
+  resultadoCaixa.style.borderColor = "#007bff";
+  resultadoCaixa.style.backgroundColor = "#f0f8ff";
+  resultadoCaixa.style.padding = "15px 25px";
+  linhaResultadoWrapper.appendChild(resultadoCaixa);
+  container.appendChild(linhaResultadoWrapper);
+
+  if (resto === 0) {
+    const exataTexto = document.createElement("div");
+    exataTexto.textContent = "Esta divisão é exata!";
+    exataTexto.style.fontSize = "1.3em";
+    exataTexto.style.fontWeight = "bold";
+    exataTexto.style.color = "#d62728";
+    exataTexto.style.textAlign = "center";
+    linhaResultadoWrapper.appendChild(exataTexto);
+  }
+
+  // ############# 6. EXIBIR RESULTADO FINAL (BLOCO RESULTADO) #############
+  const base = parseInt(bloco1.baseSelector.value);
+  const resultado = quociente;
+  const casasInt = Math.max(
+    1,
+    Math.floor(Math.log(Math.max(1, Math.abs(resultado))) / Math.log(base)) + 1
+  );
+  blocoResultado.setResultado(resultado, base, casasInt, 0);
+}
+
+function criarCaixaGrupoSimbolico(titulo) {
+  const coluna = document.createElement("div");
+  coluna.className = "column";
+  coluna.style.display = "flex";
+  coluna.style.flexDirection = "column";
+  coluna.style.alignItems = "center";
+  coluna.style.justifyContent = "space-between"; // Título em cima, número embaixo
+  coluna.style.minWidth = "90px"; // Um pouco mais largo
+  coluna.style.border = "1px solid #007bff";
+  coluna.style.borderRadius = "8px";
+  coluna.style.padding = "10px 5px";
+  coluna.style.minHeight = "100px";
+  coluna.style.backgroundColor = "#f0f8ff";
+  coluna.style.width = "fit-content";
+  coluna.style.whiteSpace = "normal";
+
+  // ✅ INÍCIO DA CORREÇÃO (Muda a cor do título se for "Resto")
+  const isResto = titulo === "Resto";
+  const corTitulo = isResto ? "#d62728" : "#333"; // Vermelho para Resto, preto para Grupos
+
+  coluna.innerHTML = `<strong style="margin-bottom: 5px; white-space: nowrap; display: block; width: 100%; text-align: center; color: ${corTitulo};">${
+    isResto ? "Resto" : "Grupo " + titulo
+  }</strong>`;
+  // ✅ FIM DA CORREÇÃO
+
+  return coluna;
 }
 
 function posicionarSeta() {
@@ -2116,19 +2396,17 @@ async function executarAnimacaoVaiUmVisual(bloco) {
       // 🟥 Marca bolinhas que vão se transformar
       const bolinhasParaTransformar = bolas.slice(0, base);
       bolinhasParaTransformar.forEach((ball) => {
-        ball.classList.add("bolinha-transformando");
+        ball.classList.add("bolinha-transformando"); // Esta classe agora só pisca (graças ao CSS)
       });
 
-      column.classList.add("caixa-destacada");
+      column.classList.add("caixa-destacada"); // 👉 TOCA O SOM DE EXPLOSÃO (antes de remover as bolinhas)
 
-      // 👉 TOCA O SOM DE EXPLOSÃO (antes de remover as bolinhas)
       if (bloco.soundEnabled) {
         bloco.removeSound.pause();
         bloco.removeSound.currentTime = 0;
         bloco.removeSound.play();
-      }
+      } // ✅ GARANTE QUE COLUNA DESTINO EXISTE
 
-      // ✅ GARANTE QUE COLUNA DESTINO EXISTE
       let destino = bloco.columns.find((c) => c.power === power + 1);
       if (!destino) {
         const novaColuna = bloco.createColumn(
@@ -2145,19 +2423,16 @@ async function executarAnimacaoVaiUmVisual(bloco) {
       }
 
       mostrarSetaCurvaVisual(column, destino.column);
-      await esperar(2000);
+      await esperar(2000); // 🔄 Remove bolinhas antigas (explosão)
 
-      // 🔄 Remove bolinhas antigas (explosão)
       bolinhasParaTransformar.forEach((ball) => ball.remove());
-      column.classList.remove("caixa-destacada");
+      column.classList.remove("caixa-destacada"); // ➕ Adiciona nova bolinha na próxima coluna com destaque
 
-      // ➕ Adiciona nova bolinha na próxima coluna com destaque
-      const nova = document.createElement("div");
-      nova.className = "ball bolinha-transformando";
-      bloco.applyBallStyle(nova, power + 1);
-      destino.column.appendChild(nova);
+      const nova = document.createElement("div"); // ✅ CORREÇÃO 1: Usa a classe "bolinha-chegando" (que pisca só 2x)
+      nova.className = "ball bolinha-chegando";
+      bloco.applyBallStyle(nova, power + 1); // ✅ Isso agora vai definir a cor (ex: laranja)
+      destino.column.appendChild(nova); // 👉 TOCA O SOM DE INSERÇÃO ao adicionar a nova bolinha
 
-      // 👉 TOCA O SOM DE INSERÇÃO ao adicionar a nova bolinha
       if (bloco.soundEnabled) {
         bloco.addSound.pause();
         bloco.addSound.currentTime = 0;
@@ -2166,14 +2441,13 @@ async function executarAnimacaoVaiUmVisual(bloco) {
 
       destino.column.classList.add("caixa-destacada");
 
-      await esperar(2000);
+      await esperar(2000); // ✅ CORREÇÃO 2: Remove a classe de animação para parar o pisca-pisca
 
-      nova.classList.remove("bolinha-transformando");
+      nova.classList.remove("bolinha-chegando");
       destino.column.classList.remove("caixa-destacada");
 
-      bloco.updateResult();
+      bloco.updateResult(); // 🌀 Recomeça para tratar outros possíveis "vai-um"
 
-      // 🌀 Recomeça para tratar outros possíveis "vai-um"
       return executarAnimacaoVaiUmVisual(bloco);
     }
   }
