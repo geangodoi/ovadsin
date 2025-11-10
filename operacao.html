@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ambiente de Operações com Sistemas de Numeração</title>
+
+    <link rel="stylesheet" href="css/operacao.css" />
+
+    <style>
+      .caixa-retangulo {
+        border: 3px solid #007bff;
+        border-radius: 12px;
+        padding: 25px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 1300px;
+        width: 100%;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .result-container {
+        display: flex;
+        flex-wrap: wrap; /* quebra se faltar espaço */
+        gap: 15px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .result-box {
+        border: 2px solid #007bff;
+        padding: 15px 20px;
+        border-radius: 8px;
+        background-color: #f0f8ff;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        width: fit-content;
+      }
+
+      .title-box {
+        border: 2px solid #211883;
+        border-radius: 30px;
+        padding: 15px 30px;
+        background-color: #00bfff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        margin: 20px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        max-width: 90%;
+        text-align: center;
+        word-break: break-word;
+        flex-wrap: wrap;
+      }
+
+      .title-box h1 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #000;
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .ellipsis {
+        font-weight: bold;
+        font-size: 1.1em;
+        color: black;
+        font-family: monospace;
+        padding-left: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title-box">
+      <h1>Ambiente Digital de Aprendizagem de Sistemas de Numeração</h1>
+    </div>
+
+    <div class="controle-global-base">
+      <span>Escolha o tipo de base usada nos blocos:</span>
+      <label>
+        <input
+          type="radio"
+          name="modoBase"
+          value="unica"
+          id="modoUnico"
+          checked
+        />
+
+        Usar a mesma base para todos os blocos
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="modoBase"
+          value="diferente"
+          id="modoDiferente"
+        />
+
+        Permitir bases diferentes para cada bloco
+      </label>
+    </div>
+
+    <div class="caixa-retangulo">
+      <div class="rotulo-bloco">🟩 Bloco 1</div>
+
+      <div class="controls">
+        <div class="control-group destaque">
+          <label>*** ESCOLHA O PRIMEIRO NÚMERO *** </label>
+        </div>
+
+        <div class="control-group">
+          <label>
+            Escolha a base do <br />
+            sistema de numeração
+          </label>
+          <input
+            type="number"
+            class="baseSelector"
+            min="2"
+            max="10"
+            value="2"
+          />
+        </div>
+        <div class="control-group">
+          <label>
+            Quantidade de algarismos <br />
+            da parte inteira
+          </label>
+          <input
+            type="number"
+            class="integerColumnSelector"
+            min="1"
+            max="10"
+            value="1"
+          />
+        </div>
+        <div class="control-group">
+          <label>
+            Quantidade de algarismos <br />
+            da parte fracionária
+          </label>
+          <input
+            type="number"
+            class="decimalColumnSelector"
+            min="0"
+            max="10"
+            value="2"
+          />
+        </div>
+        <div class="control-group control-buttons">
+          <button class="resetButton">Limpar representação</button>
+
+          <button class="toggleSoundButton" title="Desativar som">
+            <span class="sound-icon">🔊</span>
+            <span class="sound-label">Som ativado</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="ball-container">
+          <h2>Bolinhas</h2>
+          <div
+            class="ball draggableBall"
+            draggable="true"
+            title="Arraste a bolinha para uma coluna e componha um número"
+            style="background-color: #ffffff; border: 2px dotted #000000"
+          ></div>
+        </div>
+        <div class="base-container abacusContainer"></div>
+      </div>
+
+      <div class="result-container">
+        <div class="result-box">
+          <span class="baseDisplay">Número na Base: 0</span>
+        </div>
+
+        <div class="result-box resultDisplay">
+          Representação do número na base 10: 0
+        </div>
+        <div class="result-box detailedCalculationBox">
+          <strong class="polynomialTitle">
+            Polinômio de Representação Posicional: N =
+          </strong>
+          <span class="detailedCalculation"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="caixa-retangulo bloco2">
+      <div class="rotulo-bloco">🟪 Bloco 2</div>
+
+      <div class="controls">
+        <div class="control-group destaque">
+          <label>*** ESCOLHA O SEGUNDO NÚMERO *** </label>
+        </div>
+
+        <div class="control-group">
+          <label>
+            Escolha a base do <br />
+            sistema de numeração
+          </label>
+          <input
+            type="number"
+            class="baseSelector"
+            min="2"
+            max="10"
+            value="2"
+          />
+        </div>
+
+        <div class="control-group">
+          <label>
+            Quantidade de algarismos <br />
+            da parte inteira
+          </label>
+          <input
+            type="number"
+            class="integerColumnSelector"
+            min="1"
+            max="10"
+            value="1"
+          />
+        </div>
+
+        <div class="control-group">
+          <label>
+            Quantidade de algarismos <br />
+            da parte fracionária
+          </label>
+          <input
+            type="number"
+            class="decimalColumnSelector"
+            min="0"
+            max="10"
+            value="2"
+          />
+        </div>
+
+        <div class="control-group control-buttons">
+          <button class="resetButton">Limpar representação</button>
+          <button class="toggleSoundButton" title="Desativar som">
+            <span class="sound-icon">🔊</span>
+            <span class="sound-label">Som ativado</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="ball-container">
+          <h2>Bolinhas</h2>
+          <div class="ball draggableBall" draggable="true"></div>
+        </div>
+        <div class="base-container"></div>
+      </div>
+
+      <div class="result-container">
+        <div class="result-box">
+          <span class="baseDisplay">Número na Base: 0</span>
+        </div>
+
+        <div class="result-box">
+          <span class="resultDisplay">0</span>
+        </div>
+        <div class="result-box">
+          <strong class="polynomialTitle">Polinômio: N = </strong>
+          <span class="detailedCalculation"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="operacao-controls">
+      <label>Escolha a operação:</label>
+      <select id="operacao">
+        <option value="soma">➕ Adição</option>
+        <option value="subtracao">➖ Subtração</option>
+        <option value="multiplicacao">✖️ Multiplicação</option>
+        <option value="divisao">➗ Divisão</option>
+      </select>
+      <button id="executarOperacao">Executar</button>
+    </div>
+
+    <div class="caixa-retangulo bloco-resultado">
+      <div class="rotulo-bloco">🟥 Bloco Resultado</div>
+
+      <div class="controls">
+        <div class="control-group destaque">
+          <label>*** RESULTADO DA OPERAÇÃO ***</label>
+        </div>
+
+        <div class="control-group">
+          <label
+            >Escolha a base do sistema <br />
+            de numeração
+          </label>
+          <input
+            type="number"
+            class="baseSelector"
+            min="2"
+            max="10"
+            value="2"
+          />
+        </div>
+
+        <div class="control-group">
+          <label
+            >Quantidade de algarismos <br />
+            da parte inteira
+          </label>
+          <input
+            type="number"
+            class="integerColumnSelector"
+            min="1"
+            max="10"
+            value="2"
+          />
+        </div>
+
+        <div class="control-group">
+          <label
+            >Quantidade de algarismos <br />
+            da parte fracionária
+          </label>
+          <input
+            type="number"
+            class="decimalColumnSelector"
+            min="0"
+            max="10"
+            value="2"
+          />
+        </div>
+
+        <div class="control-group control-buttons">
+          <button class="resetButton">Limpar</button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="draggableBall" style="display: none"></div>
+        <div class="base-container abacusContainer"></div>
+      </div>
+
+      <div class="result-container">
+        <div class="result-box">
+          <span class="baseDisplay">Número na Base: 0</span>
+        </div>
+
+        <div class="result-box resultDisplay">
+          Representação do número na base 10: 0
+        </div>
+        <div class="result-box detailedCalculationBox">
+          <strong class="polynomialTitle">Polinômio: N =</strong>
+          <span class="detailedCalculation"></span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .querySelector(".bloco-resultado .draggableBall")
+        ?.setAttribute("style", "display: none");
+    </script>
+
+    <script src="js/operacao.js"></script>
+  </body>
+</html>

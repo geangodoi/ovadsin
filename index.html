@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ambiente de Operações com Sistemas de Numeração</title>
+
+    <!-- Importa o CSS da pasta 'css' -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="main-wrapper">
+      <div class="grupo-imagens">
+        <img src="img/logoifg.jpg" alt="Instituto Federal IFG" />
+        <img src="img/logoppgecm.png" alt="Programa de Pós-Graduação PPGECM" />
+        <img src="img/grupo.jpg" alt="Grupo de Pesquisa NEPEM" />
+        <img src="img/logosee.png" alt="Secretaria de Educação SEE" />
+        <img src="img/logofapeg.png" alt="Fundação FAPEG" />
+      </div>
+
+      <div class="menu-container">
+        <nav class="menu-bar">
+          <ul>
+            <li><a href="index.html">EM DESTAQUE</a></li>
+            <li><a href="exemplo.html">EXEMPLO NUMÉRICO</a></li>
+            <!-- 🔥 Novo item -->
+            <li>
+              <a href="operacao.html">OPERAÇÕES EM SISTEMAS DE NUMERAÇÃO</a>
+            </li>
+            <li><a href="teoria.html">TEORIA</a></li>
+            <li>
+              <a href="objetovirtual.html">OBJETO VIRTUAL DE APRENDIZAGEM</a>
+            </li>
+            <li><a href="quemsomos.html">QUEM SOMOS</a></li>
+            <!-- ✅ Agora no fim -->
+          </ul>
+        </nav>
+      </div>
+
+      <div class="title-container">
+        <div class="title-box">
+          <h1>
+            Ambiente Digital de Aprendizagem de Sistemas de Numeração: Uma
+            Abordagem Desenvolvimental
+          </h1>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <label>
+            Escolha a base do <br />
+            sistema de numeração
+          </label>
+          <input type="number" id="baseSelector" min="2" max="10" value="2" />
+        </div>
+        <div class="control-group">
+          <label
+            >Quantidade de algarismos <br />
+            da parte inteira
+          </label>
+          <input
+            type="number"
+            id="integerColumnSelector"
+            min="1"
+            max="10"
+            value="1"
+          />
+        </div>
+        <div class="control-group">
+          <label
+            >Quantidade de algarismos <br />
+            da parte fracionária
+          </label>
+          <input
+            type="number"
+            id="decimalColumnSelector"
+            min="0"
+            max="10"
+            value="2"
+          />
+        </div>
+        <div class="control-group control-buttons">
+          <button id="resetButton">Limpar representação</button>
+          <button id="toggleSoundButton" title="Desativar som">
+            <span class="sound-icon">🔊</span>
+            <span class="sound-label">Som ativado</span>
+          </button>
+        </div>
+
+        <div class="control-group"></div>
+      </div>
+
+      <div class="container">
+        <div class="ball-container" id="ballContainer">
+          <h2>Bolinhas</h2>
+          <div
+            class="ball"
+            draggable="true"
+            id="draggableBall"
+            title="Arraste a bolinha para uma coluna ou clique dentro de uma “caixa” para compor um número"
+            style="background-color: #ffffff; border: 2px dotted #000000"
+          ></div>
+        </div>
+        <div class="base-container" id="abacusContainer"></div>
+      </div>
+
+      <style>
+        .result-box {
+          border: 2px solid #007bff; /* Borda azul */
+          padding: 15px 20px; /* Espaço interno */
+          border-radius: 8px; /* Cantos arredondados */
+          background-color: #f0f8ff; /* Fundo azul clarinho */
+          font-family: Arial, sans-serif;
+          font-weight: bold;
+          margin-bottom: 15px; /* Espaço entre os retângulos */
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+          width: fit-content; /* Só ocupa o espaço do conteúdo */
+        }
+      </style>
+
+      <div class="result-row">
+        <div class="result-box" id="baseDisplay">Número na Base: 0</div>
+        <div class="result-box" id="resultDisplay">Resultado: 0</div>
+      </div>
+
+      <div class="result-box" id="detailedCalculationBox">
+        <strong id="polynomialTitle"
+          >Polinômio de Representação Posicional: N =</strong
+        >
+        <span id="detailedCalculation"></span>
+      </div>
+
+      <div class="explanation" id="explanationText">
+        Arraste a bolinha da caixa 'Bolinhas' para os recipientes abaixo para
+        adicionar novas bolinhas. As bolinhas adotam a cor e forma
+        correspondentes às colunas, tanto durante o arraste quanto nas
+        animações.
+      </div>
+    </div>
+
+    <!-- Importa o JS da pasta 'js' -->
+
+    <script src="js/BaseNumberExplorer.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1957 @@
+body {
+  font-family: "Arial", sans-serif;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 20px 20px 40px;
+  background-color: #f5faff;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #4a4e69;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.caixa-retangulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 3px solid #007bff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  max-width: fit-content; /* 🔥 Se ajusta ao conteúdo */
+  min-width: 300px; /* 🔒 valor mínimo para não quebrar */
+  width: auto; /* deixa o conteúdo decidir o tamanho */
+  margin: 20px auto; /* 🔄 centraliza o bloco automaticamente */
+  box-sizing: border-box;
+}
+
+.result-container {
+  display: flex;
+  flex-wrap: wrap; /* ✅ permite quebrar se necessário */
+  justify-content: center; /* ✅ centraliza os blocos */
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.result-box {
+  border: 2px solid #007bff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #f0f8ff;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  word-break: break-word;
+  white-space: nowrap;
+  text-align: center;
+  width: fit-content; /* ✅ centraliza naturalmente */
+}
+
+.title-box {
+  border: 2px solid #211883;
+  border-radius: 20px;
+  padding: 10px 30px;
+  background-color: #00bfff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 90%;
+  text-align: center;
+  word-break: break-word;
+  flex-wrap: wrap;
+}
+
+.title-box h1 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  margin: 0;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Ajuste da linha dos controles */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* separa as partes */
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end; /* alinhado à direita */
+  flex-wrap: nowrap; /* 🔥 Evita que os botões quebrem para a linha de baixo */
+}
+
+label {
+  font-weight: bold;
+  color: #4a4e69;
+  font-size: 14px;
+}
+
+input[type="number"] {
+  width: 45px;
+  padding: 5px;
+  border: 1px solid #a5b1c2;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="number"]:focus {
+  border-color: #ff6f61;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 42px;
+}
+
+button:hover {
+  background-color: #0000ff;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: center;
+}
+
+.base-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  margin-top: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.column {
+  width: 80px;
+  border: 4px solid #4a4e69;
+  margin: 0 2px 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, height 0.3s;
+}
+
+.column:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.column-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-weight: bold;
+  color: #4a4e69;
+  font-size: 18px;
+  background-color: #f7f9fc;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.column-count {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  color: #4a4e69;
+  font-size: 16px;
+  background-color: #f7f9fc;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ball:hover {
+  transform: scale(1.1);
+}
+
+.symbolic-ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px 0;
+  position: relative;
+  animation: temporaryBall 0.5s alternate infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #a5b1c2;
+  padding: 5px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+  z-index: 100;
+  transform: scale(1.5);
+  transform-origin: top left;
+}
+
+.tooltip .ball-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.tooltip-text {
+  font-size: 14px;
+  color: #4a4e69;
+  font-weight: bold;
+}
+
+/* Animações */
+@keyframes moveToNext {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-60px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes temporaryBall {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-box {
+  0% {
+    box-shadow: 0 0 5px #00bfff;
+  }
+  50% {
+    box-shadow: 0 0 15px #00bfff;
+  }
+  100% {
+    box-shadow: 0 0 5px #00bfff;
+  }
+}
+
+.ball-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  border: 2px dashed #a5b1c2;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  animation: pulse-box 3s infinite;
+}
+
+.draggableBall {
+  background-color: #fa8072 !important;
+  border: 2px dotted #000000;
+  animation: rotate-ball 13s linear infinite;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.draggableBall:hover {
+  transform: scale(1.3) rotate(360deg);
+  background-color: #ff0000 !important;
+  border-color: #000000;
+}
+
+.column-label,
+.column-count {
+  border: 2px solid #4a4e69;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.toggleSoundButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap; /* 🔥 Mantém o texto numa linha só */
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 42px;
+  min-width: 130px; /* 🔥 Garante espaço suficiente para o texto maior */
+}
+
+.toggleSoundButton:hover {
+  background-color: #0000ff;
+}
+
+.sound-icon {
+  font-size: 22px;
+}
+
+.sound-label {
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .column {
+    width: 60px;
+  }
+
+  .ball {
+    width: 35px;
+    height: 35px;
+  }
+
+  .title-box h1 {
+    font-size: 20px;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.destaque {
+  border: 2px solid #1e90ff;
+  background-color: #eaf6ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.destaque label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1e90ff;
+}
+
+.comma-separator {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0 -10px;
+  color: #ff0000;
+  align-self: flex-end;
+  padding-bottom: 10px;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+.operacao-controls {
+  margin: 20px;
+  padding: 10px;
+  background: #eaf6ff;
+  border: 2px solid #1e90ff;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.operacao-controls label {
+  font-size: 18px; /* ou maior, se preferir */
+  font-weight: bold;
+}
+
+.operacao-controls select {
+  font-size: 18px;
+  padding: 6px 12px;
+}
+
+.operacao-controls button {
+  font-size: 17px;
+}
+
+.bloco-resultado .draggableBall {
+  display: none !important;
+}
+
+.rotulo-bloco {
+  margin-top: -20px;
+  margin-bottom: -10px;
+  margin-left: 0; /* Alinha à esquerda */
+  align-self: flex-start; /* Garante que fique no canto da caixa */
+  background-color: #eaf6ff;
+  border: 2px solid #1e90ff;
+  border-radius: 8px 8px 0 0;
+  padding: 6px 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e90ff;
+  display: inline-block;
+  position: relative;
+  top: 0;
+  z-index: 1;
+}
+
+.blocos-lado-a-lado {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.operacao-central {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #eaf6ff;
+  border: 2px solid #1e90ff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  width: 220px; /* ✅ largura exata e proporcional */
+  margin-top: -10px; /* ✅ ajuste fino de posicionamento */
+  align-self: center;
+}
+
+.blocos-lado-a-lado {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding: 10px;
+  padding-left: 20px; /* ✅ margem interna para evitar corte no início */
+}
+
+.caixa-retangulo {
+  min-width: 600px;
+  flex-shrink: 0;
+}
+
+.operacao-central {
+  width: 220px;
+  max-width: 220px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.bloco-topo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: -10px;
+  flex-wrap: wrap;
+}
+
+.bloco-topo .rotulo-bloco {
+  margin-top: 0; /* anula o -20px */
+  margin-bottom: 0; /* remove espaçamento extra */
+}
+
+.bloco-topo .destaque-inline {
+  border: 2px solid #1e90ff;
+  background-color: #eaf6ff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bloco-topo .destaque-inline label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1e90ff;
+  margin: 0;
+}
+
+.operacao-central {
+  font-size: 16px; /* 🔼 aumenta todas as fontes internas */
+}
+
+.operacao-central label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.operacao-central select {
+  font-size: 16px;
+  padding: 8px 12px;
+}
+
+.operacao-central button {
+  font-size: 16px;
+}
+
+.mensagem-operacao {
+  font-weight: bold;
+  font-size: 16px;
+  color: #1e90ff;
+  background-color: #f0f8ff;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px dashed #1e90ff;
+  margin-left: 10px;
+  white-space: nowrap;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.caixa-operacao-unificada {
+  background-color: #f0f8ff;
+  border: 2px solid #007bff;
+  border-radius: 20px;
+  padding: 30px 50px;
+  margin: 90px auto;
+  width: fit-content;
+  max-width: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: row; /* lado a lado */
+  align-items: center; /* alinha verticalmente ao centro */
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 40px; /* espaço entre mensagem e operação */
+  flex-wrap: nowrap; /* evita quebra de linha */
+}
+
+.texto-operacao-base {
+  color: #007bff;
+  font-size: 22px;
+  font-weight: bold;
+  white-space: nowrap; /* impede quebra do texto */
+  margin: 0;
+  padding: 0;
+}
+
+.visual-operacao {
+  font-family: "Courier New", monospace;
+  font-size: 26px;
+  text-align: right;
+  white-space: pre; /* mantém formatação do texto */
+  line-height: 1.6;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  min-width: 120px; /* largura mínima para o conteúdo */
+  font-weight: bold;
+}
+
+.chave-divisao {
+  display: inline-block;
+  font-family: "Courier New", monospace;
+  font-size: 1.8em;
+  line-height: 1.3;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.linha-superior {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.dividendo {
+  padding-right: 0.4em; /* espaço entre número e barra */
+}
+
+.barra-vertical {
+  width: 0;
+  border-left: 3px solid black;
+  height: 1.4em;
+  margin: 0 0.3em; /* espaço horizontal: dividendo |barra| divisor */
+  position: relative;
+  top: 0;
+}
+
+.divisor {
+  padding-left: 0.4em;
+  border-bottom: 3px solid black;
+
+  /* NOVO: traz a linha horizontal para a esquerda */
+  display: inline-block;
+  position: relative;
+  left: -0.3em; /* ajuste fino, aumente se necessário */
+}
+.ball {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+#setaProximoPasso {
+  font-size: 60px;
+  margin: 0 20px;
+  align-self: flex-start;
+  margin-top: 250px;
+
+  color: #007bff;
+  opacity: 0.9;
+  animation: dashBorder 1.5s linear infinite;
+  border: 3px dashed #007bff;
+  padding: 10px 15px;
+  border-radius: 12px;
+}
+
+@keyframes respirarSeta {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.1);
+    opacity: 1;
+  }
+}
+.bloco-final {
+  border-color: #007bff;
+}
+
+.bloco-final .rotulo-bloco {
+  background-color: #007bff;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.topo-bloco-resultado {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline; /* ✅ agora alinha pelo texto */
+  gap: 10px;
+}
+
+.topo-bloco-resultado .rotulo-bloco {
+  margin: 0;
+  background-color: #eaf6ff;
+  border: 2px solid #1e90ff;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e90ff;
+  display: inline-block;
+}
+
+.topo-bloco-resultado .botao-executar:hover {
+  background-color: #0000ff;
+}
+.caixa-retangulo.bloco-resultado {
+  align-items: flex-start; /* ✅ alinha tudo à esquerda apenas nesse bloco */
+}
+
+.topo-bloco-resultado .botao-executar {
+  height: 32px;
+  padding: 6px 14px;
+  font-size: 14px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  margin-top: 0px; /* 🔧 ajuste alinhamento vertical */
+}
+.result-container {
+  width: 100%;
+}
+@keyframes piscar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.piscando {
+  animation: piscar 0.5s ease-in-out infinite;
+}
+@keyframes piscar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.piscando {
+  animation: piscar 0.5s ease-in-out infinite;
+}
+
+@keyframes destaqueColuna {
+  0%,
+  100% {
+    box-shadow: 0 0 0px #ff0000;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff0000;
+  }
+}
+
+/* 🔷 Destaque da coluna ativa */
+.caixa-destacada {
+  animation: destaqueColuna 2s ease-in-out;
+  border: 3px dashed #ff0000 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🔷 Animação da borda destacada */
+@keyframes destaqueColuna {
+  0%,
+  100% {
+    box-shadow: 0 0 0px #ff0000;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff0000;
+  }
+}
+
+.seta-svg {
+  position: absolute;
+  overflow: visible;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.seta-svg path {
+  stroke: #007bff;
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  animation: piscarSetaSVG 1s infinite ease-in-out;
+}
+
+@keyframes piscarSetaSVG {
+  0%,
+  100% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.3;
+  }
+}
+
+.detailedCalculationBox {
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.detailedCalculation {
+  font-size: 13px;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.ball,
+.meia-bolinha {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.ball {
+  width: 50px;
+  height: 50px;
+}
+
+.ball svg,
+.meia-bolinha svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+}
+
+.meia-bolinha {
+  width: 36px;
+  height: 36px;
+}
+
+.bolinha-transformando,
+.meia-bolinha.bolinha-transformando {
+  background-color: blue !important;
+  border: 2px solid red !important;
+  animation: pulsarEPiscar 0.6s ease-in-out infinite alternate;
+}
+
+.bloco1 .column:hover,
+.bloco2 .column:hover {
+  background-color: #f5f9ff;
+  cursor: pointer;
+}
+
+.bloco-subtracao-visual {
+  border: 3px dashed #888;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #f0f0f5;
+  margin: 20px auto;
+
+  /* NOVOS AJUSTES */
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto; /* Adiciona rolagem se necessário */
+}
+
+.container-subtracao-empilhada {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.linha-minuendo,
+.linha-subtraendo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.abaco-empilhado {
+  display: flex;
+  align-items: stretch; /* 🔥 força altura igual entre colunas */
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.column-visual {
+  min-width: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 6px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+body.modo-subtracao .column-visual {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 bolinhas por linha */
+  grid-auto-rows: min-content;
+  justify-items: center;
+  align-items: end;
+  gap: 6px;
+  padding: 8px;
+
+  /* 🔥 aumente a largura da coluna visual */
+  width: 140px;
+  min-height: 140px;
+
+  box-sizing: border-box;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+body.modo-subtracao .column-visual .ball,
+body.modo-subtracao .column-visual .meia-bolinha {
+  width: 38px;
+  height: 38px;
+  margin: 0;
+}
+
+body.modo-subtracao .column-visual .ball svg,
+body.modo-subtracao .column-visual .meia-bolinha svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 🔶 Bolinha que será emprestada — piscar + pulsar azul + borda vermelha */
+.bolinha-transformando,
+.meia-bolinha.bolinha-transformando {
+  background-color: blue !important;
+  border: 2px solid red !important;
+  animation: pulsarEPiscar 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulsarEPiscar {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 6px 2px #2196f3; /* azul */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.12);
+    box-shadow: 0 0 10px 4px #1976d2; /* azul escuro */
+    opacity: 0.6;
+  }
+}
+
+/* 🔵 Bolinhas que chegam após o empréstimo — azul + pulsar */
+.bolinha-chegando,
+.meia-bolinha.bolinha-chegando {
+  background-color: blue !important;
+  border: 2px solid red !important;
+  animation: pulsarChegada 0.6s ease-in-out 0s 2 alternate;
+}
+
+@keyframes pulsarChegada {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 🔷 Fracionárias: muda a cor do conteúdo SVG interno */
+.bolinha-transformando svg path,
+.meia-bolinha.bolinha-transformando svg path {
+  fill: blue !important;
+  stroke: red !important;
+  animation: pulsarEPiscarSVG 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulsarEPiscarSVG {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+}
+/* 🔵 Aplica cor ao conteúdo SVG interno das bolinhas que chegam */
+.bolinha-chegando svg path,
+.meia-bolinha.bolinha-chegando svg path {
+  fill: blue !important;
+  stroke: red !important;
+  animation: pulsarChegadaSVG 0.6s ease-in-out 0s 2 alternate;
+}
+
+@keyframes pulsarChegadaSVG {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+}
+/* Diferença: bolinha aparecendo animadamente */
+.bolinha-diferenca {
+  opacity: 0;
+  transform: scale(0);
+  animation: aparecerBolinha 0.4s ease forwards;
+}
+
+@keyframes aparecerBolinha {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.linha-diferenca {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.grupo-diferenca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rotulo-subtracao {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+  margin-top: 10px; /* ✅ Adicione isso para controlar o espaço acima */
+  margin-bottom: 10px;
+}
+
+/* ✅ Bolinhas do resultado */
+.bolinha-diferenca {
+  border: 2px solid #444;
+  animation: destaqueResultado 0.5s ease;
+}
+
+@keyframes destaqueResultado {
+  0% {
+    transform: scale(1.2);
+    background-color: #b4f8c8;
+  }
+  100% {
+    transform: scale(1);
+    background-color: inherit;
+  }
+}
+
+/* ✅ Animações de atenção */
+.piscando {
+  animation: blink 0.6s infinite alternate;
+}
+
+.pulsando {
+  animation: pulse 0.6s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+/* 🔵 Bolinhas piscando em azul escuro com borda vermelha */
+.bolinha-azul {
+  background-color: blue !important; /* Azul escuro */
+  border: 2px solid red !important;
+  box-shadow: 0 0 6px red;
+  animation: piscarAzulForte 0.6s ease-in-out infinite alternate;
+}
+
+/* 🔵 Aplica aos SVGs das bolinhas fracionárias */
+.bolinha-azul svg {
+  animation: piscarAzulFracionario 0.6s ease-in-out infinite alternate !important;
+}
+
+/* 🔵 Animação para bolinha inteira */
+@keyframes piscarAzulForte {
+  0% {
+    background-color: blue;
+    border: 2px solid red;
+    transform: scale(1);
+  }
+  100% {
+    background-color: blue;
+    border: 2px solid red;
+    transform: scale(1.15);
+  }
+}
+
+/* 🔵 Animação para conteúdo SVG da bolinha fracionária */
+@keyframes piscarAzulFracionario {
+  0% {
+    fill: blue; /* Azul escuro forte */
+    stroke: red;
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    fill: blue; /* Azul um pouco mais claro */
+    stroke: red;
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+/* 💥 Explosão */
+.explodindo {
+  animation: explode 0.4s forwards;
+  background-color: blue !important;
+  border: 2px solid red !important;
+  box-shadow: 0 0 10px red;
+}
+
+/* 💥 Explosão keyframe */
+@keyframes explode {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+/* 🔵 Para bolinhas fracionárias (SVG) com azul escuro e borda vermelha */
+.bolinha-azul svg * {
+  fill: blue !important; /* Azul escuro */
+  stroke: red !important; /* Borda vermelha */
+  animation: piscarAzulFracionario 0.6s ease-in-out infinite alternate !important;
+}
+@keyframes piscarAzulFracionario {
+  0% {
+    fill: blue;
+    stroke: red;
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    fill: blue;
+    stroke: red;
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+body.modo-subtracao .caixa-retangulo.bloco-resultado .container,
+body.modo-subtracao .bloco-resultado .result-container,
+body.modo-multiplicacao .bloco-resultado .result-container {
+  display: none !important;
+}
+body.modo-subtracao .bloco-subtracao-visual .comma-separator {
+  margin: 0 3px; /* aumenta o espaçamento lateral apenas aqui */
+}
+/* 🔵 Somente no modo subtração, bloco de subtração e bolinhas fracionárias animadas */
+body.modo-subtracao .bloco-subtracao-visual .meia-bolinha.bolinha-chegando,
+body.modo-subtracao
+  .bloco-subtracao-visual
+  .meia-bolinha.bolinha-transformando {
+  background-color: blue !important;
+  border: 2px solid blue !important;
+}
+
+/* 🔵 Somente a "pontinha" fracionária fica azul */
+body.modo-subtracao
+  .bloco-subtracao-visual
+  .meia-bolinha.bolinha-chegando
+  svg
+  path,
+body.modo-subtracao
+  .bloco-subtracao-visual
+  .meia-bolinha.bolinha-transformando
+  svg
+  path {
+  fill: blue !important;
+  stroke: blue !important;
+}
+.caixa-retangulo.bloco-final {
+  margin-top: 40px;
+}
+
+.botao-final {
+  height: 32px;
+  padding: 4px 12px;
+  font-size: 14px;
+}
+
+/* Container da multiplicação */
+.container-multiplicacao-bloco {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 10px;
+  border: 2px dashed #1e90ff;
+  border-radius: 12px;
+  background-color: #f0f8ff;
+}
+
+/* Bloco do multiplicador (vermelho) */
+.multiplicador-vermelho {
+  border: 2px dashed #ff6347;
+  border-radius: 10px;
+  background-color: #fffaf0;
+  padding: 10px;
+}
+
+.abacus-container.multiplicador-vermelho {
+  border: 2px dashed #ff4444;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #fff8f8;
+}
+
+/* Sinal "×" */
+.sinal-multiplicacao {
+  font-weight: bold;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Estilizar colunas da multiplicação (mais estreitas) */
+body.modo-multiplicacao .bloco-multiplicacao-linha .column {
+  width: 58px;
+  min-height: 10px; /* Altura mínima da caixinha */
+  max-height: 70px; /* Altura máxima, se desejar limitar */
+  height: auto; /* Permite que cresça conforme as bolinhas */
+
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: min-content;
+  justify-content: center; /* ✅ Centraliza o grid horizontalmente */
+  align-content: center; /* ✅ Centraliza o grid verticalmente */
+  gap: 1px;
+
+  border: 2px solid #4a4e69;
+  border-radius: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+body.modo-multiplicacao .bloco-multiplicacao-linha .ball,
+body.modo-multiplicacao .bloco-multiplicacao-linha .meia-bolinha {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Vírgula compacta */
+body.modo-multiplicacao .bloco-multiplicacao-linha .comma-separator {
+  font-size: 24px;
+  margin: 0 -5px;
+  padding-bottom: 4px;
+  color: red;
+  position: relative;
+  top: -15px; /* sobe 5px, ajuste conforme necessário */
+}
+body.modo-multiplicacao .label-linha {
+  display: none !important;
+}
+.sinal-multiplicacao {
+  font-weight: bold;
+  font-size: 24px;
+  color: #333;
+  align-self: center; /* centraliza na linha */
+  position: relative;
+  top: -12px; /* sobe 4px, ajuste conforme quiser */
+}
+.multiplicador-vermelho .column {
+  width: 60px;
+  height: calc(50px * (5 - 1) + 20px); /* Ajuste esse valor se base mudar */
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: white;
+  padding: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.multiplicador-vermelho .column-label,
+.multiplicador-vermelho .column-count {
+  font-size: 14px;
+}
+
+.multiplicador-vermelho .column-count {
+  margin-top: auto;
+}
+/* 🔧 Forçar tamanho das bolinhas da multiplicação visual */
+#containerMultiplicacaoVisual .ball {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+#containerMultiplicacaoVisual .ball svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+/* Diminui o número de cima (potência) e de baixo (quantidade) APENAS no bloco de multiplicação */
+#containerMultiplicacaoVisual .column-label,
+#containerMultiplicacaoVisual .column-count {
+  font-size: 14px; /* ajuste como quiser */
+  padding: 2px 4px; /* opcional: deixa mais compacto */
+}
+/* 🔧 Multiplicação: organizar bolinhas em grade (sem afetar as labels) */
+#containerMultiplicacaoVisual .column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 bolinhas por linha */
+  grid-auto-rows: min-content;
+  justify-items: center;
+  align-items: center;
+  padding: 4px;
+  gap: 2px;
+  position: relative;
+  width: 60px;
+  min-height: 70px;
+  border: 2px solid #4a4e69;
+  border-radius: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+/* 🔧 Reposiciona as labels novamente (se foram sobrescritas por outros estilos) */
+#containerMultiplicacaoVisual .column-label {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#containerMultiplicacaoVisual .column-count {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+body.modo-multiplicacao
+  .caixa-retangulo.bloco-resultado
+  #blocoMultiplicacaoVisual
+  + .container {
+  display: none !important;
+}
+body:not(.modo-subtracao):not(.modo-multiplicacao)
+  .bloco-resultado
+  .result-container {
+  display: flex !important;
+}
+
+#blocoMultiplicacaoVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os cards de multiplicação */
+  gap: 10px; /* Espaço entre cada card de operação */
+  align-self: center; /* ✅ ESTA LINHA CORRIGE O ALINHAMENTO DO BLOCO */
+}
+
+/* O container de cada operação completa (A x B = C) */
+body.modo-multiplicacao .bloco-multiplicacao-linha {
+  display: flex;
+  flex-direction: column; /* ✅ A MÁGICA: Deixa tudo um embaixo do outro */
+  align-items: center; /* Centraliza horizontalmente */
+  gap: 15px; /* Espaço vertical entre os elementos */
+
+  padding: 20px;
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: fit-content; /* Se ajusta à largura do maior ábaco */
+}
+
+/* Ajusta o posicionamento dos sinais no layout vertical */
+.sinal-multiplicacao,
+.sinal-igual {
+  font-weight: bold;
+  font-size: 2.5em;
+  color: #007bff;
+  margin: 10px 0; /* Adiciona margem vertical em vez de horizontal */
+  line-height: 1;
+}
+
+.sinal-multiplicacao {
+  top: 0;
+}
+
+.linha-resultado-final {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#containerMultiplicacaoVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.aviso-bolinhas {
+  color: blue;
+  font-weight: bold;
+  animation: pulsar 5s infinite;
+  text-align: center;
+  grid-column: 1 / -1;
+  font-size: 0.72em;
+}
+
+@keyframes pulsar {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 🔷 Container principal do empilhamento */
+#blocoMultiplicacaoSomaParcial {
+  border: 2px dashed #aaa;
+  padding: 15px 20px;
+  background: #f9f9f9;
+  margin-top: 30px;
+}
+
+#containerMultiplicacaoSomaParcial {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center; /* ✅ CENTRALIZA AS LINHAS */
+  align-items: center; /* ✅ CENTRALIZA CADA LINHA */
+}
+
+#containerMultiplicacaoSomaParcial .linha-resultado-parcial {
+  margin-bottom: 0px !important;
+}
+
+#containerMultiplicacaoSomaParcial {
+  margin-bottom: -40px;
+}
+
+/* 🔷 Rótulo de seção */
+.rotulo-subtracao {
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+.linha-resultado-parcial {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 1px 1px;
+  margin-bottom: 0px;
+  background: #fff;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+}
+
+/* 🔥 Estilo unificado para colunas de resultado parcial */
+.linha-resultado-parcial .column,
+.resultado-parcial-container .column,
+.column.caixa-vazia {
+  width: 70px; /* aumenta largura para igualar */
+  min-width: 70px; /* garante tamanho fixo */
+  max-width: 70px;
+  height: 55px;
+  min-height: 55px;
+  max-height: 55px;
+  padding: 4px;
+  border: 2px dashed #ccc;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* bolinhas colam no fundo */
+  align-items: center; /* centraliza horizontalmente */
+  gap: 2px;
+  margin: 0;
+
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.column.caixa-vazia {
+  border: 2px dotted blue;
+}
+
+.linha-resultado-parcial .ball {
+  width: 14px;
+  height: 14px;
+  background-color: orange;
+  border-radius: 50%;
+  margin: 0;
+  gap: 10px;
+}
+
+.linha-resultado-parcial .column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 bolinhas por linha */
+  grid-auto-rows: min-content;
+  justify-items: center; /* centraliza horizontalmente cada item */
+  align-content: center; /* centraliza o conjunto verticalmente */
+  justify-content: center; /* centraliza o grid horizontalmente */
+  align-items: center; /* centraliza cada bolinha verticalmente */
+
+  width: 52px;
+  height: 55px;
+  padding: 4px;
+  border: 2px solid #3c3c64;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin: 0;
+  gap: 2px;
+
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: blue;
+}
+.linha-resultado-parcial .column .aviso-bolinhas {
+  grid-column: 1 / -1; /* ocupa as 3 colunas da grid */
+  align-self: center;
+  text-align: center;
+}
+
+.resultado-parcial-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.ball.pos-0 {
+  background-color: #ff7f0e;
+}
+.ball.pos-1 {
+  background-color: #1f77b4;
+}
+.ball.pos-2 {
+  background-color: #2ca02c;
+}
+.ball.pos-3 {
+  background-color: #d62728;
+}
+.ball.pos-4 {
+  background-color: #9467bd;
+}
+.ball.pos-5 {
+  background-color: #8c564b;
+}
+.ball.pos-6 {
+  background-color: #e377c2;
+}
+.ball.pos-7 {
+  background-color: #17becf;
+}
+.bloco-multiplicacao-linha .column {
+  margin-left: -5px; /* ou ajuste entre -4px a -10px até ficar ideal */
+}
+.bloco-multiplicacao-linha .sinal-multiplicacao {
+  margin: 0 -18px; /* força o sinal a “colar” nos elementos vizinhos */
+  padding: 0;
+}
+.bloco-multiplicacao-linha .sinal-igual {
+  margin: 0 -12px; /* força a “cola” com os elementos vizinhos */
+  padding: 0;
+}
+
+.botao-container {
+  margin-top: 1px; /* aumenta o espaçamento para descer */
+  text-align: center; /* centraliza horizontalmente */
+}
+.linha-resultado-parcial .column .column-count {
+  grid-column: 1 / -1; /* ocupa todas as colunas do grid */
+  justify-self: center; /* centraliza horizontalmente dentro da coluna */
+  text-align: center; /* centraliza o texto */
+  width: 100%; /* garante que pegue toda a largura */
+}
+#linhaResultadoFinal .column {
+  /* Outras propriedades que já existem */
+  font-size: 20px;
+  width: 52px;
+  min-height: 55px;
+  max-height: 55px;
+  padding: 4px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: min-content;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+  border: 2px solid #4a4e69;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  position: relative;
+  min-width: 70px; /* Para acomodar a borda e o padding */
+  padding: 8px;
+  border: 2px dashed blue; /* Borda azul clara tracejada */
+}
+
+/* Bolinhas no resultado final */
+#linhaResultadoFinal .ball {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  border-radius: 50%;
+  background-color: orange;
+}
+
+/* Texto de contagem no resultado final */
+#linhaResultadoFinal .column-count {
+  grid-column: 1 / -1; /* ocupa todas as colunas */
+  justify-self: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: blue;
+  width: 100%;
+}
+#linhaResultadoFinal .column {
+  min-height: 55px; /* altura mínima fixa */
+  max-height: 55px; /* impede que cresça demais */
+  height: 55px; /* fixa a altura para todas */
+}
+#linhaResultadoFinal .column-count {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.aviso-bolinhas-final {
+  /* Estilos que você já tem */
+  color: #dc143c;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.72em;
+  animation: pulsar-suave 5s infinite;
+
+  /* ADICIONE ESTA LINHA PARA A CORREÇÃO FINAL */
+  grid-column: 1 / -1;
+}
+@keyframes pulsar-suave {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05); /* Efeito de pulso mais suave */
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#containerMultiplicacaoSomaParcial .aviso-bolinhas,
+#containerMultiplicacaoSomaParcial .aviso-bolinhas-final {
+  font-size: 13px !important; /* ajuste como quiser */
+  font-weight: bold;
+  color: blue;
+}
+#containerMultiplicacaoSomaParcial .column:empty {
+  border: 2px dashed #ccc;
+  box-shadow: none;
+}
+.column.destacada {
+  animation: destaque-coluna 0.8s infinite alternate;
+}
+@keyframes destaque-coluna {
+  0% {
+    transform: scale(1);
+    border: 2px solid yellow;
+  }
+  100% {
+    transform: scale(1.1);
+    border: 2px solid orange;
+  }
+}
+#containerMultiplicacaoSomaParcial .aviso-bolinhas {
+  filter: brightness(0.5); /* mais escuro sem trocar a cor */
+  font-weight: bold;
+}
+.contador-bolinhas {
+  font-size: 28px; /* Tamanho grande para destaque */
+  font-weight: bold;
+  color: #007bff; /* Cor primária do seu projeto */
+  background-color: #eaf6ff;
+  border: 2px dashed #007bff;
+  border-radius: 10px;
+  padding: 10px 5px;
+  width: 90%;
+  text-align: center;
+  margin: auto; /* Centraliza dentro da coluna */
+  box-sizing: border-box;
+}
+
+/* Coloque este código no final do seu arquivo CSS */
+
+/* Estilo para destacar a coluna que está sendo processada */
+.caixa-destacada {
+  border: 4px solid #ffc107 !important; /* Laranja/Amarelo para destaque */
+  box-shadow: 0 0 25px rgba(255, 193, 7, 0.7);
+  transform: scale(1.05);
+  transition: all 0.4s ease-in-out;
+  z-index: 10;
+}
+
+/* Atualize esta classe no seu arquivo css/exemplo.css */
+.vai-um-animado {
+  position: fixed;
+  background-color: #28a745;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 25px;
+  border: 2px solid white;
+  font-weight: bold;
+  font-size: 20px;
+  z-index: 1000;
+  pointer-events: none;
+  /* A MUDANÇA ESTÁ AQUI: Trocamos 'transform' por 'left' e 'top' */
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Animação de piscar para chamar atenção ao número que vai ser processado */
+@keyframes piscar-forte {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+  }
+}
+
+.processando-numero {
+  animation: piscar-forte 1s ease-in-out infinite;
+}
+/* Coloque no final do seu arquivo CSS */
+
+/* Animação de "pulso" para o número que recebe o "vai-um" */
+.numero-recebendo-vai-um {
+  /* O nome da animação é 'pulso-receber', dura 0.4s, e acontece 1 vez */
+  animation: pulso-receber 0.4s ease-out 1;
+}
+
+@keyframes pulso-receber {
+  0% {
+    transform: scale(1);
+    color: #007bff; /* Cor normal do contador */
+  }
+  50% {
+    transform: scale(1.6); /* Aumenta de tamanho no meio da animação */
+    color: #28a745; /* Fica verde para indicar que recebeu um valor */
+  }
+  100% {
+    transform: scale(1);
+    color: #007bff; /* Volta à cor e tamanho normais */
+  }
+}
+.ball.cancelada {
+  opacity: 0.2;
+  background-color: transparent !important;
+  border: 2px dashed #999 !important;
+  pointer-events: none;
+}
+
+/* 🔵 Estilo para linhas parciais */
+.linha-parcial {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* 🔒 Esconde as casas da linha final inicialmente */
+.linha-final .casa {
+  visibility: hidden;
+}
+
+/* 🟥 Casa padrão */
+.casa {
+  width: 60px;
+  height: 50px;
+  border: 2px dashed blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: red;
+  background-color: white;
+}
+
+/* ✨ Animação de piscar para casas */
+.casa.piscar {
+  animation: piscarProdutoParcial 2s ease-in-out;
+}
+
+/* 🔄 Animação usada também na linha final */
+.linha-resultado-final .column.processando-numero {
+  animation: piscarProdutoParcial 2s ease-in-out;
+}
+
+/* ✨ Piscar para qualquer coluna durante a animação */
+.piscar-coluna {
+  animation: piscarProdutoParcial 2s ease-in-out;
+}
+
+/* 🟡 Animação unificada */
+@keyframes piscarProdutoParcial {
+  0%,
+  100% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: white;
+  }
+}
+.container-linha-final {
+  display: flex;
+  justify-content: flex-end; /* Alinha com o conteúdo da direita */
+  width: 100%;
+  max-width: 1000px; /* mesmo valor do .caixa-retangulo */
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-right: 16px; /* ajuste fino opcional */
+}
+/* Esconde o ábaco e a linha de resultado do bloco de resultado APENAS na divisão */
+body.modo-divisao .bloco-resultado .container,
+body.modo-divisao .bloco-resultado .result-container {
+  display: none !important;
+}
+body.modo-divisao .bloco-resultado .linha-inferior-bloco-resultado {
+  display: none !important;
+}
+
+body.modo-divisao .bloco-resultado .container {
+  display: none !important;
+}
+
+/* ✅ COLE ESTA NOVA REGRA NO FINAL DO SEU CSS */
+
+/* Correção de tamanho da bolinha da divisão.
+  Esta regra é específica o suficiente para sobrescrever a da linha 1904
+  usando o mesmo ID e uma classe extra.
+*/
+#containerMultiplicacaoVisual .ball.divisao-anim-ball {
+  width: 30px !important; /* Mude aqui para o tamanho que desejar */
+  height: 30px !important; /* Mude aqui para o tamanho que desejar */
+}
+
+/* Animação para bolinhas que serão convertidas no "vai-um" */
+.bolinha-vai-um-piscar {
+  animation: piscarBolinha 0.8s infinite alternate; /* Pisca */
+  background-color: blue !important; /* Cor vermelha para destaque */
+  box-shadow: 0 0 8px 3px red; /* Brilho */
+  transform: scale(1.1); /* Um leve aumento de tamanho */
+}
+
+@keyframes piscarBolinha {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quem Somos</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/quemsomos.css" />
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="typewriter"></h1>
+
+      <!-- Duelci -->
+      <div class="autor" data-aos="fade-up">
+        <img src="img/duelci.png" alt="Duelci Vaz" class="foto" />
+        <div class="autor-info">
+          <span class="nome-autor">
+            Duelci Aparecido de Freitas Vaz
+            <a
+              href="http://lattes.cnpq.br/7087050865236814"
+              target="_blank"
+              class="lattes-link"
+              title="Currículo Lattes"
+            >
+              <img
+                src="img/logolattes.png"
+                alt="Currículo Lattes"
+                class="lattes-img"
+              />
+            </a>
+          </span>
+          <p>
+            Doutor em Educação Matemática pela Universidade Estadual Paulista –
+            Câmpus de Rio Claro-SP (2007). Mestre em Matemática pela
+            Universidade Federal de Goiás (1996). Graduado em Licenciatura em
+            Matemática pela Pontifícia Universidade Católica de Goiás (1989). É
+            professor adjunto da PUC Goiás desde 1996 e atua nos cursos de
+            Matemática e Física. Desenvolve pesquisas na área de Educação
+            Matemática e coordena o Núcleo de Estudo e Pesquisa em Educação
+            Matemática do Instituto Federal de Educação, Ciência e Tecnologia
+            (NEPEM/IFG).
+          </p>
+        </div>
+      </div>
+
+      <!-- Gean -->
+      <div class="autor" data-aos="fade-up" data-aos-delay="100">
+        <img src="img/gean.png" alt="Gean Henrique Godoi" class="foto" />
+        <div class="autor-info">
+          <span class="nome-autor">
+            Gean Henrique Godoi
+            <a
+              href="http://lattes.cnpq.br/6443044842073795"
+              target="_blank"
+              class="lattes-link"
+              title="Currículo Lattes"
+            >
+              <img
+                src="img/logolattes.png"
+                alt="Currículo Lattes"
+                class="lattes-img"
+              />
+            </a>
+          </span>
+          <p>
+            Doutorando no Programa de Pós-Graduação em Educação para Ciências e
+            Matemática (PPGECM) do Câmpus Jataí do Instituto Federal de Goiás
+            (IFG), na linha de pesquisa em Educação Matemática, com ênfase na
+            abordagem do ensino desenvolvimental de Davydov. Mestre em
+            Matemática pela UFG (2013). Possui três especializações: em Métodos
+            e Técnicas de Ensino; em Ensino de Ciências Exatas; e em Matemática,
+            Suas Tecnologias e o Mundo do Trabalho. Graduado em Matemática pela
+            UCG (2004). Professor vinculado à SEE-GO. É integrante do Núcleo de
+            Estudo e Pesquisa em Educação Matemática (NEPEM/IFG), coordenado
+            pelo Prof. Dr. Duelci Aparecido de Freitas Vaz. Bolsista FAPEG.
+          </p>
+        </div>
+      </div>
+
+      <!-- Uender -->
+      <div class="autor" data-aos="fade-up" data-aos-delay="200">
+        <img src="img/under.png" alt="Uender Barbosa de Souza" class="foto" />
+        <div class="autor-info">
+          <span class="nome-autor">
+            Uender Barbosa de Souza
+            <a
+              href="http://lattes.cnpq.br/1814694796457722"
+              target="_blank"
+              class="lattes-link"
+              title="Currículo Lattes"
+            >
+              <img
+                src="img/logolattes.png"
+                alt="Currículo Lattes"
+                class="lattes-img"
+              />
+            </a>
+          </span>
+          <p>
+            Doutor em Engenharia Elétrica e de Computação (2023) e mestre em
+            Matemática (2015) pela Universidade Federal de Goiás. Graduado em
+            Licenciatura em Matemática pela Universidade Estadual de Goiás
+            (2008). Iniciou sua carreira docente em 2009 na Universidade
+            Estadual de Goiás (Câmpus Iporá), onde atuou até 2014, colaborando
+            com projetos de extensão. Atualmente é professor efetivo no
+            Instituto Federal de Goiás (IFG). É coordenador e membro fundador do
+            Instituto GeoGebra de Goiás. Tem experiência com linguagens de
+            programação (Python, Perl, PHP, Java) e atua principalmente nos
+            seguintes temas: Processamento Digital de Sinais, Métodos Numéricos,
+            Análise Matemática e Investigação Matemática com uso de Tecnologias.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <script>
+      const texto = "Equipe de Pesquisa";
+      let i = 0;
+      function escrever() {
+        if (i < texto.length) {
+          document.getElementById("typewriter").innerHTML += texto.charAt(i);
+          i++;
+          setTimeout(escrever, 100);
+        }
+      }
+      window.onload = escrever;
+    </script>
+  </body>
+</html>
