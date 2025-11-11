@@ -1012,7 +1012,7 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
   }
 }
 
-/* 🔷 Fracionárias: muda a cor do conteúdo SVG interno */
+/*  Fracionárias: muda a cor do conteúdo interno */
 .bolinha-transformando svg path,
 .meia-bolinha.bolinha-transformando svg path {
   fill: blue !important;
@@ -1030,7 +1030,7 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
     opacity: 0.5;
   }
 }
-/* 🔵 Aplica cor ao conteúdo SVG interno das bolinhas que chegam */
+/* Aplica cor ao conteúdo SVG interno das bolinhas que chegam */
 .bolinha-chegando svg path,
 .meia-bolinha.bolinha-chegando svg path {
   fill: blue !important;
@@ -1126,19 +1126,19 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
   }
 }
 
-/* 🔵 Bolinhas piscando em azul escuro com borda vermelha */
+/*  Bolinhas piscando em azul escuro com borda vermelha */
 .bolinha-azul {
   border: 2px solid red !important;
   box-shadow: 0 0 6px red;
   animation: piscarAzulForte 0.6s ease-in-out infinite alternate;
 }
 
-/* 🔵 Aplica aos SVGs das bolinhas fracionárias */
+/* Aplica aos SVGs das bolinhas fracionárias */
 .bolinha-azul svg {
   animation: piscarAzulFracionario 0.6s ease-in-out infinite alternate !important;
 }
 
-/* 🔵 Animação para bolinha inteira */
+/*  Animação para bolinha inteira */
 @keyframes piscarAzulForte {
   0% {
     background-color: blue;
@@ -1152,7 +1152,7 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
   }
 }
 
-/* 🔵 Animação para conteúdo SVG da bolinha fracionária */
+/* Animação para conteúdo SVG da bolinha fracionária */
 @keyframes piscarAzulFracionario {
   0% {
     fill: blue; /* Azul escuro forte */
@@ -1183,7 +1183,7 @@ body.modo-subtracao .column-visual .meia-bolinha svg {
     opacity: 0;
   }
 }
-/* 🔵 Para bolinhas fracionárias (SVG) com azul escuro e borda vermelha */
+/* Para bolinhas fracionárias (SVG) com azul escuro e borda vermelha */
 .bolinha-azul svg * {
   fill: blue !important; /* Azul escuro */
   stroke: red !important; /* Borda vermelha */
@@ -1219,7 +1219,7 @@ body.modo-subtracao
   border: 2px solid blue !important;
 }
 
-/* 🔵 Somente a "pontinha" fracionária fica azul */
+/*  Somente a "pontinha" fracionária fica azul */
 body.modo-subtracao
   .bloco-subtracao-visual
   .meia-bolinha.bolinha-chegando
@@ -1485,7 +1485,7 @@ body.modo-multiplicacao .bloco-multiplicacao-linha {
   }
 }
 
-/* 🔷 Container principal do empilhamento */
+/*  Container principal do empilhamento */
 #blocoMultiplicacaoSomaParcial {
   border: 2px dashed #aaa;
   padding: 15px 20px;
@@ -1514,7 +1514,7 @@ body.modo-multiplicacao .bloco-multiplicacao-linha {
   margin-bottom: -40px;
 }
 
-/* 🔷 Rótulo de seção */
+/*  Rótulo de seção */
 .rotulo-subtracao {
   font-weight: bold;
   margin-bottom: 12px;
@@ -1536,7 +1536,7 @@ body.modo-multiplicacao .bloco-multiplicacao-linha {
   border-radius: 8px;
 }
 
-/* 🔥 Estilo unificado para colunas de resultado parcial */
+/*  Estilo unificado para colunas de resultado parcial */
 .linha-resultado-parcial .column,
 .resultado-parcial-container .column,
 .column.caixa-vazia {
@@ -1850,19 +1850,19 @@ body.modo-multiplicacao .bloco-multiplicacao-linha {
   pointer-events: none;
 }
 
-/* 🔵 Estilo para linhas parciais */
+/* Estilo para linhas parciais */
 .linha-parcial {
   display: flex;
   gap: 8px;
   margin-top: 10px;
 }
 
-/* 🔒 Esconde as casas da linha final inicialmente */
+/*  Esconde as casas da linha final inicialmente */
 .linha-final .casa {
   visibility: hidden;
 }
 
-/* 🟥 Casa padrão */
+/*  Casa padrão */
 .casa {
   width: 60px;
   height: 50px;
@@ -1876,22 +1876,22 @@ body.modo-multiplicacao .bloco-multiplicacao-linha {
   background-color: white;
 }
 
-/* ✨ Animação de piscar para casas */
+/*  Animação de piscar para casas */
 .casa.piscar {
   animation: piscarProdutoParcial 2s ease-in-out;
 }
 
-/* 🔄 Animação usada também na linha final */
+/*  Animação usada também na linha final */
 .linha-resultado-final .column.processando-numero {
   animation: piscarProdutoParcial 2s ease-in-out;
 }
 
-/* ✨ Piscar para qualquer coluna durante a animação */
+/*  Piscar para qualquer coluna durante a animação */
 .piscar-coluna {
   animation: piscarProdutoParcial 2s ease-in-out;
 }
 
-/* 🟡 Animação unificada */
+/*  Animação unificada */
 @keyframes piscarProdutoParcial {
   0%,
   100% {
@@ -1923,7 +1923,7 @@ body.modo-divisao .bloco-resultado .container {
   display: none !important;
 }
 
-/* ✅ COLE ESTA NOVA REGRA NO FINAL DO SEU CSS */
+/* COLE ESTA NOVA REGRA NO FINAL DO SEU CSS */
 
 /* Correção de tamanho da bolinha da divisão.
   Esta regra é específica o suficiente para sobrescrever a da linha 1904

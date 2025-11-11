@@ -1,4 +1,4 @@
-// ✅ Função auxiliar para aguardar "ms" milissegundos
+//  Função auxiliar para aguardar "ms" milissegundos
 function esperar(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -33,7 +33,7 @@ function formatarBaseComReticencia(baseInt, fracArray, casas = 8) {
 
   return fracString ? `${baseInt},${fracString}` : `${baseInt}`;
 }
-// ✅ Funções auxiliares necessárias ANTES da classe
+//  Funções auxiliares necessárias ANTES da classe
 function convertFractionToBase(fraction, base, digits = 20) {
   const result = [];
   let frac = fraction;
@@ -601,15 +601,15 @@ class BaseNumberExplorer {
       return;
     }
 
-    // ✅ Valor decimal real baseado nas bolinhas
+    //  Valor decimal real baseado nas bolinhas
     const valorDecimalReal = this.getValorDecimal();
 
-    // ✅ Corrige para evitar erro de arredondamento
+    // Corrige para evitar erro de arredondamento
     const casasFixas = this.decimalColumns;
     const fator = Math.pow(10, casasFixas);
     const valorCorrigido = Math.round(valorDecimalReal * fator) / fator;
 
-    // ✅ Formata número decimal (base 10)
+    //  Formata número decimal (base 10)
     const totalFormatado = formatarNumero(valorCorrigido, casasFixas);
 
     const valorNaBaseHTML = this.getNumeroBaseString();
@@ -618,12 +618,12 @@ class BaseNumberExplorer {
       ? `<span style="display: inline-block; width: 2ch; text-align: center;">−</span>`
       : "";
 
-    // ✅ Atualiza os textos
+    //  Atualiza os textos
     this.resultDisplay.innerHTML = `Representação do número na base 10: ${sinalHTML}${totalFormatado}`;
 
     this.baseDisplay.innerHTML = `Número na Base ${this.base}: ${sinalHTML}${valorNaBaseHTML}`;
 
-    // ✅ Polinômio
+    //  Polinômio
     const detailedTerms = this.columns.map(({ column, power }) => {
       const ballCount = column.querySelectorAll(".ball").length;
       return `${ballCount} × ${this.base}<sup>${power}</sup>`;
@@ -694,7 +694,7 @@ class BaseNumberExplorer {
 
     this.createAbacus();
 
-    // ✅ CORREÇÃO DE ARREDONDAMENTO
+    //  CORREÇÃO DE ARREDONDAMENTO
     const casasFixas = this.decimalColumns;
     const fatorCorte = Math.pow(10, casasFixas);
     resultado = Math.floor(resultado * fatorCorte + 1e-9) / fatorCorte;
@@ -780,7 +780,7 @@ function atualizarChaveDivisao(dividendo, divisor) {
 }
 
 function atualizarVisualOperacao(bloco1, bloco2, operacao, base) {
-  // ✅ Pega os valores EXATAMENTE como são mostrados na interface
+  //  Pega os valores EXATAMENTE como são mostrados na interface
   const num1 =
     bloco1.container
       .querySelector(".baseDisplay")
@@ -884,7 +884,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const botaoLimparRepresentacao = blocoResultado.resetButton;
   if (botaoLimparRepresentacao) {
     botaoLimparRepresentacao.addEventListener("click", () => {
-      // 🔴 1. Limpa visual da subtração
+      //  1. Limpa visual da subtração
       const abacoMinuendo = document.getElementById("abacoMinuendo");
       const abacoSubtraendo = document.getElementById("abacoSubtraendo");
       const abacoDiferenca = document.getElementById("abacoDiferenca");
@@ -899,17 +899,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (botaoVerDiferenca) botaoVerDiferenca.style.display = "none";
       if (visual) visual.style.display = "none";
 
-      // 🔄 2. Limpa as bolinhas, mas mantém as colunas visíveis
+      //  2. Limpa as bolinhas, mas mantém as colunas visíveis
       blocoResultado.columns.forEach(({ column }) => {
         const bolas = column.querySelectorAll(".ball");
         bolas.forEach((ball) => ball.remove());
 
-        // 🔁 Também limpa o contador visível da coluna
+        //  Também limpa o contador visível da coluna
         const count = column.querySelector(".column-count");
         if (count) count.textContent = "0";
       });
 
-      // 🔄 3. Zera os textos do resultado (mas mantém visíveis)
+      //  3. Zera os textos do resultado (mas mantém visíveis)
       const spanBase = blocoResultado.container.querySelector(".baseDisplay");
       const spanDecimal =
         blocoResultado.container.querySelector(".resultDisplay");
@@ -928,7 +928,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tituloPoli.innerHTML = `Polinômio na Base ${blocoResultado.base}: N =`;
 
-      // 🔄 4. Também zera o bloco final, da mesma forma
+      //  4. Também zera o bloco final, da mesma forma
       blocoFinal.columns.forEach(({ column }) => {
         const bolas = column.querySelectorAll(".ball");
         bolas.forEach((ball) => ball.remove());
@@ -1021,7 +1021,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (operacaoAtual === "subtracao") {
         await copiarEstadoParaBlocoFinal(blocoResultado, blocoFinal);
 
-        // ✅ INÍCIO DA NOVA LÓGICA DE DIVISÃO
+        //  INÍCIO DA NOVA LÓGICA DE DIVISÃO
       } else if (operacaoAtual === "divisao") {
         // 1. Pega os valores decimais originais dos Blocos 1 e 2
         const valor1 = bloco1.getValorDecimal();
@@ -1038,7 +1038,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 3. Pega as configurações do Bloco Final (como o aluno quer ver o resultado)
         const baseFinal = parseInt(blocoFinal.baseSelector.value);
         const intColsFinal = parseInt(blocoFinal.integerColumnSelector.value);
-        // ✅ CORREÇÃO: Garante que o Bloco Final tenha casas fracionárias para mostrar
+        //  CORREÇÃO: Garante que o Bloco Final tenha casas fracionárias para mostrar
         let fracColsFinal = parseInt(blocoFinal.decimalColumnSelector.value);
         if (fracColsFinal === 0 && resultadoDecimal % 1 !== 0) {
           fracColsFinal = 4; // Define 4 casas decimais por padrão se o resultado for fracionário
@@ -1052,7 +1052,7 @@ document.addEventListener("DOMContentLoaded", () => {
           intColsFinal,
           fracColsFinal
         );
-        // ✅ FIM DA NOVA LÓGICA
+        //  FIM DA NOVA LÓGICA
       } else {
         console.log("Animação final não aplicável para esta operação.");
       }
@@ -1085,7 +1085,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   atualizarVisualOperacao(bloco1, bloco2, opInicial, baseAtual);
 
-  // 🔥 Aguarda as linhas do Produto Parcial aparecerem no DOM:
+  //  Aguarda as linhas do Produto Parcial aparecerem no DOM:
   const containerSoma = document.getElementById(
     "containerMultiplicacaoSomaParcial"
   );
@@ -1108,11 +1108,11 @@ selectOperacao.addEventListener("change", () => {
   const op = selectOperacao.value;
   const baseAtual = parseInt(bloco1.baseSelector.value);
 
-  // ✅ PASSO 1: Lógica da Divisão (com verificação)
+  //  PASSO 1: Lógica da Divisão (com verificação)
   let fracaoRemovida = false; // Flag para saber se precisamos avisar o aluno
 
   if (op === "divisao") {
-    // ✅ VERIFICA PRIMEIRO: Checa se os blocos JÁ TÊM bolinhas fracionárias
+    //  VERIFICA PRIMEIRO: Checa se os blocos JÁ TÊM bolinhas fracionárias
     // Usamos os próprios ábacos (bloco1, bloco2) pois é mais preciso
     [bloco1, bloco2].forEach((bloco) => {
       // Procura por qualquer coluna (power < 0) que tenha bolinhas (length > 0)
@@ -1136,7 +1136,7 @@ selectOperacao.addEventListener("change", () => {
       input.dispatchEvent(new Event("change", { bubbles: true }));
     });
   } else {
-    // ✅ PASSO 2: Lógica para as outras operações (Re-exibir)
+    //  PASSO 2: Lógica para as outras operações (Re-exibir)
     document.querySelectorAll(".decimalColumnSelector").forEach((input) => {
       const controlGroup = input.closest(".control-group");
       if (controlGroup) {
@@ -1145,14 +1145,14 @@ selectOperacao.addEventListener("change", () => {
     });
   }
 
-  // ✅ PASSO 3: Atualiza o restante da interface
+  //  PASSO 3: Atualiza o restante da interface
   bloco1.base = baseAtual;
   bloco2.base = baseAtual;
   mensagemOperacao.textContent = `Operação escolhida na base ${baseAtual}: ${operacoesLabel[op]}`;
   atualizarVisualOperacao(bloco1, bloco2, op, baseAtual);
   limparTodasAnimacoesVisuais();
 
-  // ✅ PASSO 4: Mostra o aviso (se necessário)
+  //  PASSO 4: Mostra o aviso (se necessário)
   if (fracaoRemovida) {
     // Usamos um setTimeout para garantir que o alert não trave a UI
     // antes dela terminar de redesenhar.
@@ -1170,12 +1170,12 @@ document
   .addEventListener("click", async () => {
     const operacao = document.getElementById("operacaoSelect").value;
 
-    // ✅ NOVA LINHA - Pega o elemento do título
+    //  NOVA LINHA - Pega o elemento do título
     const tituloVisual = document.getElementById(
       "titulo-bloco-visual-operacao"
     );
 
-    // ✅ NOVA LINHA - Define o texto do título com base na operação
+    //  NOVA LINHA - Define o texto do título com base na operação
     if (tituloVisual) {
       if (operacao === "divisao") {
         tituloVisual.textContent = "Visual da Divisão";
@@ -1183,11 +1183,11 @@ document
         tituloVisual.textContent = "Visual da Multiplicação";
       }
     }
-    // ✅ FIM DAS NOVAS LINHAS
+    //  FIM DAS NOVAS LINHAS
 
-    // ✅ Validação completa da divisão
+    //  Validação completa da divisão
     if (operacao === "divisao") {
-      // ✅ CORREÇÃO: A animação conceitual de "distribuir bolinhas"
+      //  CORREÇÃO: A animação conceitual de "distribuir bolinhas"
       // só deve operar com a PARTE INTEIRA dos números.
       const valor1 = Math.floor(bloco1.getValorDecimal());
       const valor2 = Math.floor(bloco2.getValorDecimal());
@@ -1207,10 +1207,10 @@ document
           "O número do Bloco 1 (dividendo) deve ser maior ou igual ao do Bloco 2 (divisor)."
         );
         return;
-      } // ✅ Chama o "Roteador" da Divisão
+      } //  Chama o "Roteador" da Divisão
 
       await executarAnimacaoDivisaoRoteador(valor1, valor2);
-      return; // ⛔ Impede cair nas outras operações
+      return; //  Impede cair nas outras operações
     }
 
     // 🧹 Limpa estados antigos
@@ -1277,8 +1277,8 @@ document
  */
 async function executarAnimacaoDivisaoRoteador(dividendo, divisor) {
   // Define os limites máximos para a animação com bolinhas
-  const MAX_BOLINHAS_MONTE = 150; // ✅ Alterado para o seu valor
-  const MAX_GRUPOS = 20; // ✅ Alterado para o seu valor
+  const MAX_BOLINHAS_MONTE = 150; //  Alterado para o seu valor
+  const MAX_GRUPOS = 20; //  Alterado para o seu valor
 
   // Pega a parte inteira (a animação literal não usa fração)
   const dividendoInt = Math.floor(dividendo);
@@ -1295,12 +1295,12 @@ async function executarAnimacaoDivisaoRoteador(dividendo, divisor) {
   }
 }
 
-// ✅ Função de animação da divisão visual com bolinhas
-// ✅ Função de animação da divisão visual com bolinhas (CORRIGIDA)
+//  Função de animação da divisão visual com bolinhas
+//  Função de animação da divisão visual com bolinhas (CORRIGIDA)
 async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
-  // 🟢 Pega o Bloco Pai (para poder exibi-lo)
+  //  Pega o Bloco Pai (para poder exibi-lo)
   const blocoPai = document.getElementById("blocoMultiplicacaoVisual");
-  // 🟢 Pega o Bloco Filho (o container correto para desenhar)
+  //  Pega o Bloco Filho (o container correto para desenhar)
   const container = document.getElementById("containerMultiplicacaoVisual");
 
   if (!blocoPai || !container) {
@@ -1308,13 +1308,13 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
     return;
   }
 
-  container.innerHTML = ""; // 🟢 Limpa APENAS o conteúdo interno
+  container.innerHTML = ""; //  Limpa APENAS o conteúdo interno
 
-  // 🟢 Exibe ambos os containers
+  //  Exibe ambos os containers
   blocoPai.style.display = "flex";
   container.style.display = "flex";
 
-  // 🟢 Define os estilos para a grade da divisão (Layout vertical)
+  //  Define os estilos para a grade da divisão (Layout vertical)
   container.style.flexDirection = "column"; // 1. Monte em cima
   container.style.flexWrap = "nowrap";
   container.style.justifyContent = "flex-start";
@@ -1369,19 +1369,19 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
       i + 1
     }</strong>`;
 
-    // ✅ NOVO: Cria um container interno para as bolinhas
+    //  NOVO: Cria um container interno para as bolinhas
     const ballGridContainer = document.createElement("div");
     ballGridContainer.className = "divisao-ball-grid";
     ballGridContainer.style.display = "grid";
-    ballGridContainer.style.gridTemplateColumns = "repeat(2, 1fr)"; // ✅ FORÇA DUAS COLUNAS
-    ballGridContainer.style.gap = "2px 4px"; // ✅ Reduzido o gap (2px vertical, 4px horizontal)
+    ballGridContainer.style.gridTemplateColumns = "repeat(2, 1fr)"; //  FORÇA DUAS COLUNAS
+    ballGridContainer.style.gap = "2px 4px"; //  Reduzido o gap (2px vertical, 4px horizontal)
     ballGridContainer.style.justifyItems = "center";
     ballGridContainer.style.alignItems = "center";
 
     coluna.appendChild(ballGridContainer); // Adiciona o grid dentro da caixa "Grupo"
     gruposContainer.appendChild(coluna); // Adiciona a caixa "Grupo" ao container de grupos
 
-    // ✅ IMPORTANTE: Salva o 'ballGridContainer' como o destino das bolinhas
+    //  IMPORTANTE: Salva o 'ballGridContainer' como o destino das bolinhas
     colunas.push(ballGridContainer);
   }
 
@@ -1391,7 +1391,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
     const bolinha = document.createElement("div");
     bolinha.className = "ball divisao-anim-ball"; // Usa a classe do CSS
     bolinha.style.backgroundColor = "#007bff";
-    bolinha.style.margin = "2px"; // ✅ Reduzida a margem
+    bolinha.style.margin = "2px"; //  Reduzida a margem
     bolinha.style.transition = "all 0.5s ease";
     bolinha.style.opacity = "0";
 
@@ -1420,7 +1420,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
   for (let i = 0; i < quociente; i++) {
     for (let j = 0; j < colunas.length; j++) {
       const bolinhaDoMonte = bolinhasDoMonte[bolinhaIndex];
-      // ✅ 'grupoDestino' agora é o 'ballGridContainer'
+      //  'grupoDestino' agora é o 'ballGridContainer'
       const grupoDestino = colunas[j];
 
       bolinhaDoMonte.style.opacity = "0";
@@ -1440,7 +1440,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
       novaBolinha.style.transform = "scale(0.5)";
       novaBolinha.style.transition = "all 0.3s ease";
 
-      // ✅ Adiciona a bolinha ao grid, que a posicionará automaticamente
+      //  Adiciona a bolinha ao grid, que a posicionará automaticamente
       grupoDestino.appendChild(novaBolinha);
 
       if (blocoResultado.soundEnabled) {
@@ -1464,7 +1464,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
 
   // ############# 5. ANIMAR O "RESTO" (TOTALMENTE REFEITO) #############
   if (resto > 0) {
-    // ✅ Cria a caixa "Resto" EXATAMENTE como uma caixa "Grupo"
+    //  Cria a caixa "Resto" EXATAMENTE como uma caixa "Grupo"
     const restoBox = document.createElement("div");
     restoBox.className = "column"; // Usa a mesma classe base
 
@@ -1484,7 +1484,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
     // Adiciona o Título do Resto
     restoBox.innerHTML = `<strong style="margin-bottom: 5px; white-space: nowrap; display: block; width: 100%; text-align: center;">Resto: ${resto}</strong>`;
 
-    // ✅ Cria o MESMO grid interno para as bolinhas do resto
+    //  Cria o MESMO grid interno para as bolinhas do resto
     const restoGridContainer = document.createElement("div");
     restoGridContainer.className = "divisao-ball-grid-resto";
     restoGridContainer.style.display = "grid";
@@ -1534,7 +1534,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
       bolinhaResto.style.transform = "scale(0.5)";
       bolinhaResto.style.transition = "all 0.3s ease";
 
-      // ✅ Adiciona ao grid interno do resto
+      //  Adiciona ao grid interno do resto
       restoGridContainer.appendChild(bolinhaResto);
 
       requestAnimationFrame(() => {
@@ -1553,7 +1553,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
 
   // ############# 6. ADICIONAR TEXTO DE RESULTADO (COM ANIMAÇÃO) #############
 
-  // ✅ NOVO: Cria um container "em linha" para o resultado e a mensagem exata
+  //  NOVO: Cria um container "em linha" para o resultado e a mensagem exata
   const linhaResultadoWrapper = document.createElement("div");
   linhaResultadoWrapper.style.display = "flex";
   linhaResultadoWrapper.style.flexDirection = "row"; // Lado a lado
@@ -1568,8 +1568,8 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
   resultadoCaixa.textContent = `Divisor: ${divisor} , Quociente: ${quociente} e Resto: ${resto}`;
 
   // Estilos para a caixa de resultado
-  // ❌ A linha "marginTop" foi removida daqui
-  resultadoCaixa.style.fontSize = "1.2em"; // ✅ Fonte que definimos
+  //  A linha "marginTop" foi removida daqui
+  resultadoCaixa.style.fontSize = "1.2em"; //  Fonte que definimos
   resultadoCaixa.style.fontWeight = "bold";
   resultadoCaixa.style.color = "#007bff";
   resultadoCaixa.style.borderColor = "#007bff";
@@ -1578,10 +1578,10 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
   const sombraOriginal = "2px 2px 5px rgba(0, 0, 0, 0.1)";
   resultadoCaixa.style.boxShadow = sombraOriginal;
 
-  // ✅ Adiciona a caixa azul ao NOVO wrapper
+  //  Adiciona a caixa azul ao NOVO wrapper
   linhaResultadoWrapper.appendChild(resultadoCaixa);
 
-  // ✅ Adiciona o NOVO wrapper ao container principal
+  //  Adiciona o NOVO wrapper ao container principal
   container.appendChild(linhaResultadoWrapper);
 
   // Animação de piscar 5 vezes
@@ -1598,7 +1598,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
   if (resto === 0) {
     const exataTexto = document.createElement("div");
     exataTexto.textContent = "Esta divisão é exata!";
-    // ❌ A linha "marginTop" foi removida daqui
+    //  A linha "marginTop" foi removida daqui
     exataTexto.style.fontSize = "1.3em";
     exataTexto.style.fontWeight = "bold";
     exataTexto.style.color = "#d62728";
@@ -1608,7 +1608,7 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
     exataTexto.style.opacity = "0";
     exataTexto.style.transition = "opacity 0.5s ease-in";
 
-    // ✅ Adiciona o texto vermelho ao NOVO wrapper
+    //  Adiciona o texto vermelho ao NOVO wrapper
     linhaResultadoWrapper.appendChild(exataTexto);
 
     await esperar(50);
@@ -1640,16 +1640,16 @@ async function executarAnimacaoDivisaoLiteral(dividendo, divisor) {
  * para casos em que os valores são muito grandes para desenhar bolinhas.
  */
 async function executarAnimacaoDivisaoSimbolica(dividendo, divisor) {
-  // 🟢 Pega o Bloco Pai e o Bloco Filho
+  //  Pega o Bloco Pai e o Bloco Filho
   const blocoPai = document.getElementById("blocoMultiplicacaoVisual");
   const container = document.getElementById("containerMultiplicacaoVisual");
   container.innerHTML = ""; // Limpa
 
-  // 🟢 Exibe os containers
+  //  Exibe os containers
   blocoPai.style.display = "flex";
   container.style.display = "flex";
 
-  // 🟢 Define os estilos (vertical, com espaçamento)
+  //  Define os estilos (vertical, com espaçamento)
   container.style.flexDirection = "column";
   container.style.flexWrap = "nowrap";
   container.style.justifyContent = "flex-start";
@@ -1797,7 +1797,7 @@ async function executarAnimacaoDivisaoSimbolica(dividendo, divisor) {
   restoContador.className = "contador-bolinhas numero-recebendo-vai-um";
   restoContador.textContent = resto;
 
-  // ✅✅✅ INÍCIO DA CORREÇÃO ✅✅✅
+  //  INÍCIO DA CORREÇÃO
   // Só aplica os efeitos de "Resto" se ele for maior que zero
   if (resto > 0) {
     // 1. Muda a cor do NÚMERO e da borda do contador
@@ -1813,7 +1813,7 @@ async function executarAnimacaoDivisaoSimbolica(dividendo, divisor) {
       await esperar(300);
     }
   }
-  // ✅✅✅ FIM DA CORREÇÃO ✅✅✅
+  //  FIM DA CORREÇÃO
 
   restoBoxEl.appendChild(restoContador);
   tocarSomInserir();
@@ -1877,14 +1877,14 @@ function criarCaixaGrupoSimbolico(titulo) {
   coluna.style.width = "fit-content";
   coluna.style.whiteSpace = "normal";
 
-  // ✅ INÍCIO DA CORREÇÃO (Muda a cor do título se for "Resto")
+  //  INÍCIO DA CORREÇÃO (Muda a cor do título se for "Resto")
   const isResto = titulo === "Resto";
   const corTitulo = isResto ? "#d62728" : "#333"; // Vermelho para Resto, preto para Grupos
 
   coluna.innerHTML = `<strong style="margin-bottom: 5px; white-space: nowrap; display: block; width: 100%; text-align: center; color: ${corTitulo};">${
     isResto ? "Resto" : "Grupo " + titulo
   }</strong>`;
-  // ✅ FIM DA CORREÇÃO
+  //  FIM DA CORREÇÃO
 
   return coluna;
 }
@@ -1975,7 +1975,7 @@ function aplicarOperacao() {
     resultado = valor1 * valor2;
   }
 
-  // ✅ Cálculo de casas fracionárias
+  //  Cálculo de casas fracionárias
   const casasFrac1 = parseInt(bloco1.decimalColumnSelector.value) || 0;
   const casasFrac2 = parseInt(bloco2.decimalColumnSelector.value) || 0;
   const casasFrac = Math.max(casasFrac1, casasFrac2, 2); // força no mínimo 6 casas
@@ -2046,7 +2046,7 @@ function mostrarSubtracaoEmpilhada() {
     abacoMinuendo.appendChild(divM);
     abacoSubtraendo.appendChild(divS);
 
-    // ✅ Insere vírgula após a última potência positiva
+    //  Insere vírgula após a última potência positiva
     const proximaPotencia = todasPotencias[i + 1];
     if (temVirgula && pot >= 0 && proximaPotencia < 0) {
       const virgula = document.createElement("div");
@@ -2088,12 +2088,12 @@ async function animarAdicaoEducativa() {
   for (const colunaDestino of colunasOrdenadas) {
     const pot = parseFloat(colunaDestino.dataset.power);
 
-    // 📦 AQUI está a correção — pegamos as bolinhas reais do resultado já calculado
+    //  AQUI está a correção — pegamos as bolinhas reais do resultado já calculado
     const colResultado = blocoResultado.columns.find((c) => c.power === pot);
     const quantidade =
       colResultado?.column.querySelectorAll(".ball").length || 0;
 
-    // 🔁 Insere bolinhas uma a uma com animação
+    //  Insere bolinhas uma a uma com animação
     for (let i = 0; i < quantidade; i++) {
       await esperar(200);
 
@@ -2224,19 +2224,19 @@ async function decomporAte(base, origemPot, destinoPot) {
       continue;
     }
 
-    // 🌟 Destaca colunas e mostra seta
+    // Destaca colunas e mostra seta
     colunaOrigem.classList.add("caixa-destacada");
     colunaDestino.classList.add("caixa-destacada");
     mostrarSetaCurvaVisual(colunaOrigem, colunaDestino);
     await esperar(1000);
 
-    // 🟠 Piscar e pulsar a bolinha que vai sair
+    //  Piscar e pulsar a bolinha que vai sair
     const emprestada = bolasOrigem[0];
     emprestada.classList.add("bolinha-transformando");
     await esperar(1000);
     emprestada.remove();
 
-    // 🔊 SOM de explosão ao explodir a bolinha no empréstimo
+    //  SOM de explosão ao explodir a bolinha no empréstimo
     if (blocoResultado.soundEnabled) {
       blocoResultado.removeSound.pause();
       blocoResultado.removeSound.currentTime = 0;
@@ -2402,7 +2402,7 @@ async function executarAnimacaoVaiUmVisual(bloco) {
         bloco.removeSound.pause();
         bloco.removeSound.currentTime = 0;
         bloco.removeSound.play();
-      } // ✅ GARANTE QUE COLUNA DESTINO EXISTE
+      } //  GARANTE QUE COLUNA DESTINO EXISTE
 
       let destino = bloco.columns.find((c) => c.power === power + 1);
       if (!destino) {
@@ -2823,7 +2823,7 @@ function prepararColunasDiferencaComVirgula() {
     novaCol.dataset.power = col.dataset.power;
     abacoDiferenca.appendChild(novaCol);
 
-    // 👉 Insere vírgula após a última potência positiva
+    //  Insere vírgula após a última potência positiva
     if (temVirgula && i === indexUltimaInteira - 1) {
       const virgula = document.createElement("div");
       virgula.className = "comma-separator";
@@ -2860,7 +2860,7 @@ async function animarDiferencaColunaPorColuna() {
       colSub.querySelectorAll(".ball, .meia-bolinha")
     );
 
-    // 🌟 Destacar as 3 colunas
+    //  Destacar as 3 colunas
     colMin.classList.add("caixa-destacada");
     colSub.classList.add("caixa-destacada");
     colDif.classList.add("caixa-destacada");
@@ -2869,28 +2869,28 @@ async function animarDiferencaColunaPorColuna() {
 
     const pares = Math.min(bolasMin.length, bolasSub.length);
 
-    // 🔁 Cancela bolinha por bolinha (azul + explode)
+    //  Cancela bolinha por bolinha (azul + explode)
     for (let j = 0; j < pares; j++) {
       const bMin = bolasMin[j];
       const bSub = bolasSub[j];
 
       if (!bMin || !bSub) continue;
 
-      // 🔵 Piscar em azul
+      //  Piscar em azul
       bMin.classList.add("bolinha-azul");
       bSub.classList.add("bolinha-azul");
 
       await esperar(400);
 
-      // ❌ Remove animação azul
+      //  Remove animação azul
       bMin.classList.remove("bolinha-azul");
       bSub.classList.remove("bolinha-azul");
 
-      // ✅ Aplica classe de bolinha apagada/fantasma (sem remover)
+      //  Aplica classe de bolinha apagada/fantasma (sem remover)
       bMin.classList.add("cancelada");
       bSub.classList.add("cancelada");
 
-      // 🔊 Som de remoção/cancelamento (sempre que cancela par)
+      //  Som de remoção/cancelamento (sempre que cancela par)
       if (blocoResultado.soundEnabled) {
         blocoResultado.removeSound.pause();
         blocoResultado.removeSound.currentTime = 0;
@@ -2900,7 +2900,7 @@ async function animarDiferencaColunaPorColuna() {
       await esperar(200);
     }
 
-    // 🎯 Sobra no minuendo → vai para o resultado
+    //  Sobra no minuendo → vai para o resultado
     const restantes = Array.from(
       colMin.querySelectorAll(
         ".ball:not(.cancelada), .meia-bolinha:not(.cancelada)"
@@ -2910,7 +2910,7 @@ async function animarDiferencaColunaPorColuna() {
     const power = colMin.dataset.power;
 
     if (restantes.length > 0) {
-      // ➡️ Mostrar seta visual
+      //  Mostrar seta visual
       mostrarSetaCurvaVisual(colMin, colDif);
 
       await esperar(300);
@@ -2927,7 +2927,7 @@ async function animarDiferencaColunaPorColuna() {
 
         colDif.appendChild(clone);
 
-        // 🔊 Som de inserção de bolinha da diferença (sempre que entra no resultado)
+        //  Som de inserção de bolinha da diferença (sempre que entra no resultado)
         if (blocoResultado.soundEnabled) {
           blocoResultado.addSound.pause();
           blocoResultado.addSound.currentTime = 0;
@@ -2961,20 +2961,20 @@ document
     const destino = document.getElementById("abacoDiferenca");
     const linhaDiferenca = document.getElementById("linhaDiferenca");
 
-    // 🧼 Limpa visual anterior
+    //  Limpa visual anterior
     destino.innerHTML = "";
 
-    // 🧱 Cria as colunas da diferença com vírgula
+    //  Cria as colunas da diferença com vírgula
     prepararColunasDiferencaComVirgula();
 
-    // 👁️ Exibe linha de diferença
+    //  Exibe linha de diferença
     destino.style.display = "flex";
     linhaDiferenca.style.display = "flex";
 
-    // 🔒 Esconde botão após clique
+    //  Esconde botão após clique
     document.getElementById("botaoVerDiferenca").style.display = "none";
 
-    // ▶️ Executa animação visual passo a passo
+    // ▶ Executa animação visual passo a passo
     await animarDiferencaColunaPorColuna();
   });
 /**
@@ -3029,7 +3029,7 @@ async function agruparBolinhasParaAdicao() {
 
           colunaDestino.appendChild(novaBolinha);
 
-          // 🔊 TOCA O SOM ao inserir cada bolinha
+          //  TOCA O SOM ao inserir cada bolinha
           if (blocoResultado.soundEnabled) {
             blocoResultado.addSound.pause();
             blocoResultado.addSound.currentTime = 0;
@@ -3071,7 +3071,7 @@ function criarResultadoParcialComBolinhas(numeroDecimal, base, deslocamento) {
     const fator = Math.pow(base, i + deslocamento); // potência real da base
     const qtd = Math.floor(valorRestante % base); // NÃO agrupa, só pega o valor direto
 
-    // 🔥 Em vez de agrupar, só mostra quantas bolinhas precisa
+    //  Em vez de agrupar, só mostra quantas bolinhas precisa
     const totalBolas = Math.floor(valorRestante / fator);
 
     for (let j = 0; j < totalBolas; j++) {
@@ -3181,7 +3181,7 @@ async function mostrarMultiplicacaoVisualCompleta() {
       const colunaVisual = document.createElement("div");
       colunaVisual.className = "column";
 
-      // ✅ Mostra o resultado mesmo quando é zero
+      //  Mostra o resultado mesmo quando é zero
       if (resultadoParcial > 9) {
         const aviso = document.createElement("div");
         aviso.textContent = `${resultadoParcial} bolinhas`;
@@ -3194,7 +3194,7 @@ async function mostrarMultiplicacaoVisualCompleta() {
           colunaVisual.appendChild(bolinha);
         }
       } else {
-        // ✅ Linha com zero bolinhas
+        //  Linha com zero bolinhas
         const avisoZero = document.createElement("div");
         avisoZero.textContent = `0 bolinhas`;
         avisoZero.className = "aviso-bolinhas";
@@ -3204,7 +3204,7 @@ async function mostrarMultiplicacaoVisualCompleta() {
       colunasParciais.push(colunaVisual);
     }
 
-    // ➕ Caixas vazias ao final, para alinhamento
+    //  Caixas vazias ao final, para alinhamento
     for (let i = 0; i < index; i++) {
       const caixaVazia = document.createElement("div");
       caixaVazia.classList.add("column", "caixa-vazia");
@@ -3213,20 +3213,19 @@ async function mostrarMultiplicacaoVisualCompleta() {
 
     colunasParciais.forEach((coluna) => resultadoContainer.appendChild(coluna));
 
-    // ➕ Monta tudo na linha principal
+    //  Monta tudo na linha principal
     linha.appendChild(cabecalho);
     linha.appendChild(resultadoContainer);
 
     container.appendChild(linha);
-
-    // ✅✅✅ INÍCIO DA CORREÇÃO DE SOM ✅✅✅
+    //  INÍCIO DA CORREÇÃO DE SOM
     // Toca o som de "adicionar bloco"
     if (blocoResultado.soundEnabled) {
       blocoResultado.addSound.pause();
       blocoResultado.addSound.currentTime = 0;
       blocoResultado.addSound.play();
     }
-    // ✅✅✅ FIM DA CORREÇÃO DE SOM ✅✅✅
+    //  FIM DA CORREÇÃO DE SOM
 
     await esperar(500);
   }
@@ -3284,7 +3283,7 @@ function criarBloco2MultiplicadorVisual(expoenteAlvo) {
   const casasFrac = bloco2.decimalColumns;
 
   for (let i = casasInt - 1; i >= -casasFrac; i--) {
-    // ✅ INSERE vírgula ANTES da coluna -1
+    //  INSERE vírgula ANTES da coluna -1
     if (i === -1) {
       const virgula = document.createElement("div");
       virgula.className = "comma-separator";
@@ -3325,7 +3324,7 @@ function criarBloco2MultiplicadorVisual(expoenteAlvo) {
     container.appendChild(coluna);
   }
 
-  return container; // ✅ fecha corretamente a função
+  return container; // fecha corretamente a função
 }
 
 async function animarResultadoMultiplicacaoParcial(
@@ -3417,7 +3416,7 @@ async function mostrarBlocoDeSomaDasEtapas() {
 
       const posDaDireita = colunas.length - indiceNaLinha - 1;
 
-      // 🔵 Colorir bolinhas, mas também lidar com aviso de texto
+      //  Colorir bolinhas, mas também lidar com aviso de texto
       const bolas = colunaClonada.querySelectorAll(".ball");
       if (bolas.length > 0) {
         bolas.forEach((bola) => {
@@ -3486,7 +3485,7 @@ async function animarSomaParcialPorColuna() {
   );
   if (cloneVisual) cloneVisual.remove();
 
-  // 🔄 Remove linha final antiga (se existir)
+  //  Remove linha final antiga (se existir)
   let resultadoFinal = document.getElementById("linhaResultadoFinal");
   if (resultadoFinal) resultadoFinal.remove();
 
@@ -3503,21 +3502,20 @@ async function animarSomaParcialPorColuna() {
   const botao = document.getElementById("botaoAnimarProdutoParcial");
   botao.parentNode.insertBefore(resultadoFinal, botao.nextSibling);
 
-  // 🧱 Coleta as linhas parciais
+  //  Coleta as linhas parciais
   const linhas = containerSoma.querySelectorAll(".linha-resultado-parcial");
   if (!linhas.length) {
     console.warn("❌ Nenhuma linha de resultado parcial encontrada.");
     return;
   }
-
-  // 🧮 Determina a maior quantidade de colunas
+  //  Determina a maior quantidade de colunas
   let maxColunas = 0;
   linhas.forEach((linha) => {
     const n = linha.querySelectorAll(".column").length;
     maxColunas = Math.max(maxColunas, n);
   });
 
-  // ✨ Preenche colunas faltantes à esquerda
+  //  Preenche colunas faltantes à esquerda
   linhas.forEach((linha) => {
     const qtd = linha.querySelectorAll(".column").length;
     const faltam = maxColunas - qtd;
@@ -3528,7 +3526,7 @@ async function animarSomaParcialPorColuna() {
     }
   });
 
-  // 🔵 Coleta as bolinhas por coluna
+  //  Coleta as bolinhas por coluna
   const coresPorColuna = Array.from({ length: maxColunas }, () => []);
 
   linhas.forEach((linha) => {
@@ -3552,7 +3550,7 @@ async function animarSomaParcialPorColuna() {
     });
   });
 
-  // 🔄 Constrói linha final da direita para a esquerda
+  //  Constrói linha final da direita para a esquerda
   for (let i = coresPorColuna.length - 1; i >= 0; i--) {
     const cores = coresPorColuna[i];
 
@@ -3561,12 +3559,12 @@ async function animarSomaParcialPorColuna() {
     colunaFinal.className = "column";
     resultadoFinal.prepend(colunaFinal); // direita p/ esquerda
 
-    // 🔁 Coleta colunas acima na mesma posição
+    //  Coleta colunas acima na mesma posição
     const colunasAcima = Array.from(linhas).map(
       (linha) => linha.querySelectorAll(".column")[i]
     );
 
-    // 🔔 Piscar todas as colunas (acima + final)
+    //  Piscar todas as colunas (acima + final)
     colunaFinal.classList.add("piscar-coluna");
     colunasAcima.forEach((coluna) => coluna?.classList.add("piscar-coluna"));
 
@@ -3575,7 +3573,7 @@ async function animarSomaParcialPorColuna() {
     colunaFinal.classList.remove("piscar-coluna");
     colunasAcima.forEach((coluna) => coluna?.classList.remove("piscar-coluna"));
 
-    // ⚙️ Processa o conteúdo
+    //  Processa o conteúdo
     let totalBolinhas = 0;
     let temAvisoTexto = false;
 
@@ -3589,7 +3587,7 @@ async function animarSomaParcialPorColuna() {
       }
     });
 
-    // 🔢 Se passar de 9 bolinhas, mostrar como texto
+    //  Se passar de 9 bolinhas, mostrar como texto
     if (totalBolinhas > 9 || temAvisoTexto) {
       const aviso = document.createElement("div");
       aviso.className = "aviso-bolinhas-final";
@@ -3626,7 +3624,7 @@ async function animarProdutoParcialComTotais(totais) {
     const coluna = document.createElement("div");
     coluna.className = "column resultado-animado";
 
-    // 🟢 Anima bolinhas reais se <=9, senão mostra texto com total
+    //  Anima bolinhas reais se <=9, senão mostra texto com total
     if (total <= 9) {
       for (let j = 0; j < total; j++) {
         const bola = document.createElement("div");
@@ -3648,7 +3646,7 @@ async function animarProdutoParcialComTotais(totais) {
       coluna.appendChild(texto);
     }
 
-    // 🟡 Destaca coluna atual com classe para efeito visual (opcional)
+    //  Destaca coluna atual com classe para efeito visual (opcional)
     coluna.classList.add("destacada");
     resultadoFinal.appendChild(coluna);
 
@@ -3699,7 +3697,7 @@ async function animarVaiUmInterativo(bloco) {
       const contador = colunaAtual.querySelector(".contador-bolinhas");
       if (contador) contador.classList.add("processando-numero");
 
-      // ✅ NOVO: PISCAR E MUDAR DE COR AS BOLINHAS QUE IRÃO "EXPLODIR"
+      //  NOVO: PISCAR E MUDAR DE COR AS BOLINHAS QUE IRÃO "EXPLODIR"
       const bolinhasNaColunaAtual = Array.from(
         colunaAtual.querySelectorAll(".ball")
       );

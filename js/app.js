@@ -198,7 +198,6 @@ class BaseNumberExplorer {
     count.textContent = "0";
     column.appendChild(count);
 
-    // ADICIONE ESTE BLOCO:
     column.addEventListener("click", (event) => {
       // Garante que o clique foi na coluna (não no botão de remover bolinha etc)
       // e evita adicionar ao clicar no número do topo.
@@ -340,7 +339,7 @@ class BaseNumberExplorer {
     svg.setAttribute("height", size);
     svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
 
-    // 🔴 Cores atualizadas
+    //  Cores atualizadas
     const darkColor = "#FF0000"; // Vermelho intenso para a fatia
     const lightColor = "#ffecec"; // Fundo suave
     const strokeColor = "#cc0000"; // Borda levemente mais escura

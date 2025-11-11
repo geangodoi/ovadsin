@@ -63,7 +63,7 @@ class BaseNumberExplorer {
     this.setupEventListeners();
     this.createAbacus();
 
-    // ✅ Correção: só adiciona evento se o botão existir
+    //  Correção: só adiciona evento se o botão existir
     if (this.toggleSoundButton) {
       this.toggleSoundButton.addEventListener("click", () => {
         this.soundEnabled = !this.soundEnabled;
@@ -166,7 +166,7 @@ class BaseNumberExplorer {
   createAbacus() {
     this.abacusContainer.innerHTML = "";
 
-    // 🔴 Aqui colocamos valor padrão caso seja vazio ou inválido
+    //  Aqui colocamos valor padrão caso seja vazio ou inválido
     this.base = parseInt(this.baseSelector.value) || 2;
     this.integerColumns = parseInt(this.integerColumnSelector.value) || 1;
     this.decimalColumns = parseInt(this.decimalColumnSelector.value) || 0;
@@ -621,7 +621,7 @@ class BaseNumberExplorer {
     let total = 0;
     this.columns.forEach(({ column, power }) => {
       const ballCount = column.querySelectorAll(".ball").length;
-      total += ballCount * Math.pow(this.base, power); // ✅ CORRETO!
+      total += ballCount * Math.pow(this.base, power); //  CORRETO!
     });
     return total;
   }
@@ -629,7 +629,7 @@ class BaseNumberExplorer {
   setResultado(resultado, base, intCols, fracCols) {
     const negativo = resultado < 0;
     resultado = Math.abs(resultado);
-    this.resultadoNegativo = negativo; // ✅ Corrige o sinal negativo
+    this.resultadoNegativo = negativo; //  Corrige o sinal negativo
 
     this.baseSelector.value = String(base);
 
@@ -637,11 +637,11 @@ class BaseNumberExplorer {
     this.integerColumnSelector.value = String(intColsCorrigido);
     this.decimalColumnSelector.value = String(fracCols);
 
-    // ⚠️ Cria o ábaco com a base e quantidade de colunas
+    //  Cria o ábaco com a base e quantidade de colunas
     this.decimalColumns = fracCols;
     this.createAbacus();
 
-    // ⚠️ Agora adiciona as bolinhas com base no valor decimal
+    //  Agora adiciona as bolinhas com base no valor decimal
     let valorRestante = resultado;
     this.columns
       .sort((a, b) => b.power - a.power) // maior para menor potência
@@ -665,7 +665,7 @@ class BaseNumberExplorer {
       const balls = column.querySelectorAll(".ball");
       balls.forEach((ball) => ball.remove());
     });
-    this.resultadoNegativo = false; // ✅ Aqui
+    this.resultadoNegativo = false; //  Aqui
     this.updateResult();
   }
 }
