@@ -481,7 +481,7 @@ button:hover {
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
-  overflow-x: auto;
+
   padding: 10px;
 }
 
@@ -506,13 +506,12 @@ button:hover {
   gap: 30px;
   justify-content: flex-start;
   align-items: flex-start;
-  overflow-x: auto;
+
   padding: 10px;
   padding-left: 20px; /* ✅ margem interna para evitar corte no início */
 }
 
 .caixa-retangulo {
-  min-width: 600px;
   flex-shrink: 0;
 }
 
